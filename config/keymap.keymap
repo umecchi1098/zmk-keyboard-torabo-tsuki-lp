@@ -67,10 +67,10 @@
         layer_0 {
             display-name = "Base";
             bindings = <
-&kp ESC    &kp Q      &kp W           &kp E     &kp R               &kp T                                                              &kp Y             &kp U     &kp I      &kp O               &kp P                 &kp MINUS
-&kp TAB    &kp A      &kp S           &kp D     &kp F               &kp G                                                              &kp H             &kp J     &kp K      &kp L               &kp SEMI              &kp SQT
-&kp LSHFT  &kp Z      &kp X           &kp C     &kp V               &kp B            &kp RIGHT_BRACKET          &kp BACKSLASH          &kp N             &kp M     &kp COMMA  &kp DOT             &kp FSLH              &kp INTERNATIONAL_1
-&kp LCTRL  &kp LWIN   &kp LEFT_ALT    &trans    &lt LOWER LANG2     &lt MID SPACE    &lt RAISE LANG1            &kp BACKSPACE          &lt LOWER RETURN   &trans    &trans     &kp LEFT_BRACKET    &kp EQUAL             &kp INTERNATIONAL_3
+&kp ESC    &kp Q      &kp W           &kp E     &kp R               &kp T                                                              &kp Y           &kp U     &kp I      &kp O        &kp P            &kp MINUS
+&kp TAB    &kp A      &kp S           &kp D     &kp F               &kp G                                                              &kp H           &kp J     &kp K      &kp L        &kp SEMI         &kp JP_COLON
+&kp LSHFT  &kp Z      &kp X           &kp C     &kp V               &kp B            &kp JP_LBRACKET            &kp JP_RBRACKET        &kp N           &kp M     &kp COMMA  &kp DOT      &kp FSLH         &kp INTERNATIONAL_1
+&kp LCTRL  &kp LWIN   &kp LEFT_ALT    &trans    &lt LOWER JP_EISU   &lt MID SPACE    &lt RAISE JP_KANA          &kp BACKSPACE          &kp RETURN      &none     &none      &kp JP_AT    &kp JP_CARET     &kp JP_YEN
             >;
         };
 
@@ -81,7 +81,7 @@
 &trans  &trans  &trans  &trans     &trans     &trans                  &trans  &trans     &trans     &trans     &trans      &trans
 &trans  &trans  &trans  &trans     &trans     &trans                  &trans  &mkp LCLK  &mkp RCLK  &mkp MCLK  &mo SCROLL  &trans
 &trans  &trans  &trans  &trans     &trans     &trans  &trans  &trans  &trans  &trans     &trans     &trans     &trans      &trans
-&trans  &trans  &trans  &trans     &trans     &trans  &trans  &trans  &trans  &trans     &trans     &trans     &trans      &trans
+&trans  &trans  &trans  &trans     &trans     &trans  &trans  &trans  &trans  &none      &none      &trans     &trans      &trans
             >;
         };
 
@@ -89,21 +89,21 @@
         layer_2 {
             display-name = "Lower";
             bindings = <
-&trans  &kp LS(NUMBER_1)  &kp LS(NUMBER_2)  &kp LS(N3)  &kp LS(N4)  &kp LS(N5)                     &kp LS(N6)      &kp LS(N7)     &kp LS(N8)        &kp LS(N9)         &kp LS(N0)     &trans
-&trans  &kp N1            &kp N2            &kp N3      &kp N4      &kp N5                         &kp LEFT_BRACE  &kp MINUS      &kp EQUAL         &kp RIGHT_BRACE    &kp COLON      &trans
-&trans  &kp N6            &kp N7            &kp N8      &kp N9      &kp N0      &trans  &trans     &kp LS(MINUS)   &kp LS(EQUAL)  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp BACKSLASH  &trans
-&trans  &trans            &trans            &trans      &trans      &trans      &trans  &kp DEL    &kp RETURN      &trans         &trans            &trans             &trans         &trans
-            >;
+&trans  &kp LS(N1)        &kp LS(N2)        &kp LS(N3)  &kp LS(N4)  &kp LS(N5)                              &kp LS(N6)      &kp LS(N7)     &kp LS(N8)        &kp LS(N9)         &kp LS(N0)     &trans
+&trans  &kp N1            &kp N2            &kp N3      &kp N4      &kp N5                                  &kp LEFT_BRACE  &kp MINUS      &kp EQUAL         &kp RIGHT_BRACE    &kp COLON      &kp JP_AT
+&trans  &kp N6            &kp N7            &kp N8      &kp N9      &kp N0      &kp JP_CARET  &kp JP_YEN    &kp LS(MINUS)   &kp LS(EQUAL)  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp BACKSLASH  &trans
+&trans  &trans            &trans            &trans      &trans      &trans      &trans        &kp DEL       &kp RETURN      &none          &none             &trans             &trans         &trans
+            >; 
         };
 
 // MID
         layer_3 {
-            display-name = "MID";
+            display-name = "Mid";
             bindings = <
-&trans  &trans  &trans  &trans     &trans     &trans                  &trans    &trans     &kp HOME    &trans     &trans  &trans
-&trans  &trans  &trans  &trans     &trans     &trans                  &kp HOME  &kp LEFT   &kp DOWN   &kp RIGHT  &trans  &trans
-&trans  &trans  &trans  &trans     &trans     &trans  &trans  &trans  &trans    &trans     &trans     &trans     &trans  &trans
-&trans  &trans  &trans  &trans     &trans     &trans  &trans  &trans  &trans    &trans     &trans     &trans     &trans  &trans
+&trans  &trans  &trans  &trans     &trans     &trans                   &trans       &trans     &kp HOME    &trans     &trans      &trans
+&trans  &trans  &trans  &trans     &trans     &trans                   &kp HOME     &kp LEFT   &kp DOWN    &kp RIGHT  &trans      &trans
+&trans  &trans  &trans  &trans     &trans     &trans  &trans  &trans   &trans       &trans     &trans      &trans     &trans      &trans
+&trans  &trans  &trans  &trans     &trans     &trans  &trans  &kp DEL  &kp RETURN   &none      &none       &trans     &trans      &trans
             >;
         };
 
@@ -111,32 +111,34 @@
         layer_4 {
             display-name = "Raise";
             bindings = <
-&trans  &kp F1   &kp F2   &kp F3        &kp F4        &kp F5                           &trans            &trans     &trans         &trans     &trans      &trans
-&trans  &kp F6   &kp F7   &kp F8        &kp F9        &kp F10                          &trans            &trans     &trans         &trans     &trans      &trans
-&trans  &kp F11  &kp F12  &trans        &trans        &trans      &trans  &trans       &trans            &trans     &trans         &kp HOME   &kp UP      &kp END
-&trans  &trans   &trans   &trans        &trans        &trans      &trans  &trans       &trans            &trans     &trans         &kp LEFT   &kp DOWN    &kp RIGHT
+&trans  &kp F1   &kp F2   &kp F3        &kp F4        &kp F5                              &kp KP_N7      &kp KP_N8        &kp KP_N9      &kp KP_MULTIPLY   &kp KP_DIVIDE   &trans
+&trans  &kp F6   &kp F7   &kp F8        &kp F9        &kp F10                             &kp KP_N4      &kp KP_N5        &kp KP_N6      &kp KP_PLUS       &kp KP_MINUS    &trans
+&trans  &kp F11  &kp F12  &trans        &trans        &trans      &trans     &trans       &kp KP_N1      &kp KP_N2        &kp KP_N3      &kp DOT           &trans          &trans
+&trans  &trans   &trans   &trans        &trans        &trans      &trans     &kp DEL      &kp RETURN     &none            &none          &trans            &trans           &trans
             >;
         };
 
 // SCROLL
+// スクロールレイヤー。トラックボールのスクロールモード切替に使用する
         layer_5 {
             display-name = "Scroll";
             bindings = <
 &trans  &trans  &trans  &trans     &trans     &trans                  &trans  &trans     &trans     &trans     &trans  &trans
 &trans  &trans  &trans  &trans     &trans     &trans                  &trans  &trans     &trans     &trans     &trans  &trans
 &trans  &trans  &trans  &trans     &trans     &trans  &trans  &trans  &trans  &trans     &trans     &trans     &trans  &trans
-&trans  &trans  &trans  &trans     &trans     &trans  &trans  &trans  &trans  &trans     &trans     &trans     &trans  &trans
+&trans  &trans  &trans  &trans     &trans     &trans  &trans  &trans  &trans  &none      &none      &trans     &trans  &trans
             >;
         };
 
 // ADJUST
+// 設定レイヤー。Bluetoothのペアリングや、トラックボールのモード切替などを行う
         layer_6 {
             display-name = "Adjust";
             bindings = <
 &trans  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                  &bt BT_CLR_ALL  &trans     &trans     &trans     &trans  &trans
 &trans  &trans        &trans        &trans        &trans        &trans                        &bt BT_CLR      &trans     &trans     &trans     &trans  &trans
 &trans  &trans        &trans        &trans        &trans        &trans        &trans  &trans  &out OUT_TOG    &trans     &trans     &trans     &trans  &trans
-&trans  &trans        &trans        &trans        &trans        &trans        &trans  &trans  &trans          &trans     &trans     &trans     &trans  &trans
+&trans  &trans        &trans        &trans        &trans        &trans        &trans  &trans  &trans          &none      &none      &trans     &trans  &trans
             >;
         };
     };
