@@ -100,8 +100,8 @@
         layer_3 {
             display-name = "Mid";
             bindings = <
-&trans  &trans  &trans  &trans     &trans     &trans                   &trans       &trans     &kp HOME    &trans     &trans      &trans
-&trans  &trans  &trans  &trans     &trans     &trans                   &kp HOME     &kp LEFT   &kp DOWN    &kp RIGHT  &trans      &trans
+&trans  &kp N1  &kp N2  &kp N3     &kp N4     &kp N5                   &trans       &trans     &kp HOME    &trans     &trans      &trans
+&trans  &kp N6  &kp N7  &kp N8     &kp N9     &kp N0                   &kp HOME     &kp LEFT   &kp DOWN    &kp RIGHT  &kp END     &trans
 &trans  &trans  &trans  &trans     &trans     &trans  &trans  &trans   &trans       &trans     &trans      &trans     &trans      &trans
 &trans  &trans  &trans  &trans     &trans     &trans  &trans  &kp DEL  &kp RETURN   &none      &none       &trans     &trans      &trans
             >;
@@ -113,7 +113,7 @@
             bindings = <
 &trans  &kp F1   &kp F2   &kp F3        &kp F4        &kp F5                                &kp KP_N7      &kp KP_N8        &kp KP_N9      &kp KP_MULTIPLY   &kp KP_DIVIDE   &trans
 &trans  &kp F6   &kp F7   &kp F8        &kp F9        &kp F10                               &kp KP_N4      &kp KP_N5        &kp KP_N6      &kp KP_PLUS       &kp KP_MINUS    &trans
-&trans  &kp F11  &kp F12  &trans        &trans        &trans      &trans     &kp DEL        &kp KP_N1      &kp KP_N2        &kp KP_N3      &kp DOT           &trans          &trans
+&trans  &kp F11  &kp F12  &trans        &trans        &trans      &trans     &kp KP_N0      &kp KP_N1      &kp KP_N2        &kp KP_N3      &kp DOT           &trans          &trans
 &trans  &trans   &trans   &trans        &trans        &trans      &trans     &kp BACKSPACE  &kp RETURN     &none            &none          &trans            &trans          &trans
             >;
         };
