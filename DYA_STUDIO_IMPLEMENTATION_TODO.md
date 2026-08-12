@@ -118,7 +118,7 @@
 
 ## フェーズ1: DYA用ZMK／Zephyrへの基盤更新
 
-状態: 実装・ローカル検証完了（CI／実機確認待ち）
+状態: 実装・ローカル再検証完了（CI再確認／実機確認待ち）
 
 ### Codex
 
@@ -137,12 +137,13 @@
 - [x] 非互換があれば最小限の前方移植を行う
 - [x] コンパイル警告と非推奨設定を整理する
 - [x] 基準値とファームウェアサイズを比較する
+- [x] Zephyr 4.1用のbmp_boost SoC qualifierとZMK互換宣言を設定する
 
 ### 自動検証
 
-- [ ] 左Peripheralがクリーンビルド成功する（ローカルDocker成功、CI待ち）
-- [ ] 右Centralがクリーンビルド成功する（ローカルDocker成功、CI待ち）
-- [ ] Settings Resetがクリーンビルド成功する（ローカルDocker成功、CI待ち）
+- [ ] 左Peripheralがクリーンビルド成功する（互換設定修正後のローカルDocker成功、CI再確認待ち）
+- [ ] 右Centralがクリーンビルド成功する（互換設定修正後のローカルDocker成功、CI再確認待ち）
+- [ ] Settings Resetがクリーンビルド成功する（互換設定修正後のローカルDocker成功、CI再確認待ち）
 - [x] PAW3222とIQS7211EのDevicetree nodeが生成物に存在する
 - [x] `auto_mouse_layer` と既存input processor chainが生成物に存在する
 - [x] 既存7レイヤーとPhysical Layoutが生成物に存在する
@@ -161,7 +162,8 @@ Codexの全ビルド成功後に、互換性確認を1回だけ依頼する。
 
 ### コミット
 
-- [ ] `DYA対応ZMKとZephyrへ基盤を更新`
+- [x] `DYA対応ZMKとZephyrへ基盤を更新`
+- [x] `Zephyr 4.1向けbmp_boost互換設定を追加`
 - [ ] 実機確認後に必要なら `基盤更新後の実機確認結果を反映`
 
 ---

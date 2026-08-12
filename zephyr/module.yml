@@ -1,5 +1,7 @@
 build:
   cmake: .
+  # このリポジトリ固有のKconfig設定をZephyrのビルドへ読み込ませます。
+  kconfig: Kconfig
   settings:
     board_root: .
     snippet_root: .

@@ -1,0 +1,4 @@
+# bmp_boostには専用のZMK variantがないため、このキーボード側で互換性を宣言します。
+# この設定により、Zephyr 4.1用のビルド処理がZMK対応ボードとして認識します。
+config ZMK_BOARD_COMPAT
+    default y if BOARD_BMP_BOOST_NRF52840

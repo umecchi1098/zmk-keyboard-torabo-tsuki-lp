@@ -18,7 +18,9 @@ DYA2参照実装の確認コミットは `eca79a3a9adfb0b9015508db1fa4572f668015
 | `cormoran/zmk` | `main+dya` | `e5c9b6915b56801193e359dd9bad4a167ce0d1b8` |
 | `cormoran/zephyr` | `v4.1.0+zmk-fixes+nrf-half-duplex-uart` | `7c6b4cc486ecb41a68d9c2b1def2bb3178fbb826` |
 
-フェーズ1では新しいDYA用モジュールやKconfigを追加していない。既存のStudio RPC snippetと既存機能だけを、更新後の基盤でビルドした。
+フェーズ1では新しいDYA機能用モジュールを追加していない。既存のStudio RPC snippetと既存機能だけを、更新後の基盤でビルドした。
+
+Zephyr 4.1ではHWMv2ボードのSoC qualifierが必要なため、ビルド対象を`bmp_boost/nrf52840`へ変更した。また、bmp_boostには専用のZMK variantがないため、このキーボード用モジュールの`Kconfig`から`CONFIG_ZMK_BOARD_COMPAT=y`を宣言した。これは新機能を有効化する設定ではなく、既存ボードがZMKでビルド可能であることをCIへ明示する互換設定である。
 
 GitHub Actionsは構成を再編せず、再利用Workflowの参照先だけを同じDYA向けZMKコミットへ更新した。Manifest・キャッシュ・ビルドマトリクス自体の再構成はフェーズ2で行う。
 
@@ -48,6 +50,8 @@ Zephyr 4.1では入力コールバック登録APIにユーザーデータ引数�
 ```
 
 すべて成功し、UF2、ビルドログ、Kconfig、生成Devicetreeを`.build/local/dya/`へ保存した。
+
+GitHub Actions初回実行後の互換設定修正でも同じ3成果物を再ビルドし、すべての生成Kconfigで`CONFIG_ZMK_BOARD_COMPAT=y`と`CONFIG_BOARD_TARGET="bmp_boost@1.0.0/nrf52840"`を確認した。UF2のサイズとSHA-256は初回ローカル検証から変化していない。
 
 | 成果物 | UF2 | Flash | RAM | SHA-256 |
 |---|---:|---:|---:|---|
@@ -90,7 +94,15 @@ IQS7211E検証用Devicetreeでは、`azoteq,iqs7211e` nodeと同じ既存input p
 
 `src/board.c`の入力コールバックAPI移行に伴って一度発生した型不一致警告は解消済み。
 
+## GitHub Actions初回検証
+
+[GitHub Actions #13](https://github.com/umecchi1098/zmk-keyboard-torabo-tsuki-lp/actions/runs/31576078081)で、左Peripheralと右CentralはUF2生成まで成功したが、その後のZMKボード互換チェックで失敗した。生成されたUF2のサイズはローカル検証値と一致した。
+
+原因は、Zephyr 4.1のHWMv2形式に対して`build.yaml`が従来の`bmp_boost`指定のままであり、`CONFIG_ZMK_BOARD_COMPAT`も未宣言だったことである。`bmp_boost/nrf52840`への変更と、このリポジトリ固有のKconfig宣言で修正した。
+
+Settings Resetは`west update`中に複数のGitHubリポジトリで証明書検証エラーが発生し、ビルド開始前に失敗した。同じ依存取得は修正後のローカルDockerで成功しているため、コードやmanifestの不整合ではなくActionsランナー側の一時的な通信エラーとして、修正後CIで再確認する。
+
 ## 未完了ゲート
 
-- GitHub Actionsのクリーン環境で3成果物をビルドする
+- 互換設定修正後のGitHub Actionsで3成果物をビルドする
 - CI成功後、左右実機へUF2を書き込んで回帰チェックを行う

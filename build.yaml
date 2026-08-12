@@ -1,27 +1,31 @@
 include:
-  # - board: bmp_boost
+  # Zephyr 4.1では、ボード名に使用するSoCのqualifierを明示します。
+  # ZMKとの互換性は、このリポジトリ直下のKconfigで宣言しています。
+  # - board: bmp_boost/nrf52840
   #   shield: torabo_tsuki_lp_left
   #   snippet: "studio-rpc-usb-uart split-central input-trackball input-listener"
   #   artifact-name: torabo_tsuki_lp_left_central
-  # - board: bmp_boost
+  # - board: bmp_boost/nrf52840
   #   shield: torabo_tsuki_lp_right
   #   snippet: studio-rpc-usb-uart
   #   artifact-name: torabo_tsuki_lp_right_peripheral
-  - board: bmp_boost
+  - board: bmp_boost/nrf52840
     shield: torabo_tsuki_lp_left
     snippet: studio-rpc-usb-uart
     artifact-name: torabo_tsuki_lp_left_peripheral
-  - board: bmp_boost
+  - board: bmp_boost/nrf52840
     shield: torabo_tsuki_lp_right
     snippet: "studio-rpc-usb-uart split-central input-trackball input-listener"
     artifact-name: torabo_tsuki_lp_right_central
-  # - board: bmp_boost
+  # - board: bmp_boost/nrf52840
   #   shield: torabo_tsuki_lp_left
   #   snippet: "studio-rpc-usb-uart input-trackball input-split"
   #   artifact-name: torabo_tsuki_lp_double_ball_left_peripheral
-  # - board: bmp_boost
+  # - board: bmp_boost/nrf52840
   #   shield: torabo_tsuki_lp_right
   #   snippet: "studio-rpc-usb-uart split-central input-trackball input-listener input-split-listener"
   #   artifact-name: torabo_tsuki_lp_double_ball_right_central
-  - board: bmp_boost
+  - board: bmp_boost/nrf52840
     shield: settings_reset
+    # ボードvariant変更後も、利用者が探す成果物名は従来どおりに保ちます。
+    artifact-name: settings_reset-bmp_boost-zmk
