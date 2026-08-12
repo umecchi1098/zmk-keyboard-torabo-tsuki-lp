@@ -102,7 +102,29 @@ IQS7211E検証用Devicetreeでは、`azoteq,iqs7211e` nodeと同じ既存input p
 
 Settings Resetは`west update`中に複数のGitHubリポジトリで証明書検証エラーが発生し、ビルド開始前に失敗した。同じ依存取得は修正後のローカルDockerで成功しているため、コードやmanifestの不整合ではなくActionsランナー側の一時的な通信エラーとして、修正後CIで再確認する。
 
+## GitHub Actions再検証
+
+[GitHub Actions #14](https://github.com/umecchi1098/zmk-keyboard-torabo-tsuki-lp/actions/runs/31577846878)で、左Peripheral、右Central、Settings Resetのビルドと成果物統合がすべて成功した。
+
+## 実機回帰と修正方針
+
+2026-08-12に左右へフェーズ1のUF2を書き込み、接続中のキー入力、ポインター移動、Auto Mouse、Scrollレイヤー、各マウスボタンを確認した。その後、無操作時間が経過すると左Peripheralが操作不能になる回帰を確認した。
+
+右Centralには、無操作5秒・15秒・30秒で左右間BLEの接続間隔とlatencyを変更する独自省電力処理がある。症状の発生条件と一致し、Zephyr 4.1移行後の左右間BLEで互換性を確認できていないため、この処理を既定で無効にする。代わりに、生成Kconfigで有効化を確認済みのZMK標準Idle（30秒）とDeep Sleep（9,000,000ミリ秒）を使用する。
+
+独自省電力処理の再導入は、Zephyr 4.1上で接続更新完了と切断理由を確認できる診断手段を整えてから別途検討する。
+
+修正後に3成果物をローカルDockerでクリーンビルドし、すべて成功した。右Centralの生成Kconfigでは`CONFIG_TORABO_TSUKI_LP_SPLIT_POWER_MGMT`が無効、ZMK標準の`CONFIG_ZMK_IDLE_TIMEOUT=30000`、`CONFIG_ZMK_IDLE_SLEEP_TIMEOUT=9000000`が有効であることを確認した。ビルドログに`src/board.c`は含まれず、独自省電力処理がファームウェアへリンクされていない。
+
+| 成果物 | UF2 | Flash | RAM | SHA-256 |
+|---|---:|---:|---:|---|
+| 左Peripheral | 397,824 B | 198,848 B | 41,992 B | `fe55f0edd2c979612d3587e142f190abcf72080dbe69c1c570c6790fb28eeef4` |
+| 右Central（回帰修正版） | 568,832 B | 284,272 B | 77,054 B | `44be737e1a1ed521bd50f8dd2c0ace2978258117d03abacf523e07cad7d04478` |
+| Settings Reset | 109,568 B | 54,652 B | 13,152 B | `1481398b551dd7b1032c9d86b2966ba579b77cac3b1302fad95203727221cfeb` |
+
+左PeripheralとSettings ResetのSHA-256は修正前と同じである。右Centralだけが変更され、修正前よりUF2は1,536バイト、Flashは724バイト、RAMは104バイト減少した。
+
 ## 未完了ゲート
 
-- 互換設定修正後のGitHub Actionsで3成果物をビルドする
-- CI成功後、左右実機へUF2を書き込んで回帰チェックを行う
+- 独自省電力処理を無効化した3成果物をGitHub Actionsでビルドする
+- 修正版の右Centralを書き込み、電池駆動で1分以上放置後も左キーが入力できることを確認する

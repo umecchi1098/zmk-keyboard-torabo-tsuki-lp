@@ -2,3 +2,12 @@
 # この設定により、Zephyr 4.1用のビルド処理がZMK対応ボードとして認識します。
 config ZMK_BOARD_COMPAT
     default y if BOARD_BMP_BOOST_NRF52840
+
+config TORABO_TSUKI_LP_SPLIT_POWER_MGMT
+    bool "Torabo Tsuki LP独自の左右間BLE省電力処理"
+    default n
+    depends on ZMK_SPLIT_ROLE_CENTRAL
+    help
+      無操作時間に応じて、左右間BLEの接続間隔を段階的に変更します。
+      Zephyr 4.1環境では左Peripheralが切断される可能性があるため、
+      安全性を優先して既定では無効にし、ZMK標準の省電力処理を使用します。
