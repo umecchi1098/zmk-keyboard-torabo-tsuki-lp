@@ -5,6 +5,10 @@
 #include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/mouse.h>
 
+// DYA Studioで作成したMacroをキーへ割り当てるbehaviorを登録します。
+// 新規状態の空slotを割り当てても、キー入力は発生しない安全な仕様です。
+#include <behaviors/runtime_macro.dtsi>
+
 #define BASE     0
 #define MOUSE    1
 #define LOWER    2

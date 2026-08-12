@@ -304,27 +304,30 @@ Codexの全ビルド成功後に、互換性確認を1回だけ依頼する。
 
 ## フェーズ5: Macro・Combo・Input Stream
 
-状態: 未着手
+状態: ローカル実装・自動検証完了（CI・実機確認待ち）
 
 ### Codex
 
-- [ ] `zmk-feature-runtime-macro` を追加する
-- [ ] `zmk-feature-runtime-combo` を追加する
-- [ ] `zmk-feature-input-stream` を追加する
-- [ ] Runtime Macro用behaviorをkeymapへincludeする
-- [ ] Runtime Macro用の空きslot／既定macro方針を決める
-- [ ] 既存BT ClearコンボをCompile-time Defaultとして維持する
-- [ ] Macro／Comboの上限をRAM使用量に合わせて設定する
-- [ ] Input Streamを開発版だけにするか、Unlock必須の本番機能にするか決定する
-- [ ] Factory ResetでRuntime設定が消去されることを自動確認する
+- [x] `zmk-feature-runtime-macro` を追加する
+- [x] `zmk-feature-runtime-combo` を追加する
+- [x] `zmk-feature-input-stream` を追加する
+- [x] Runtime Macro用behaviorをkeymapへincludeする
+- [x] Runtime Macro用の空きslot／既定macro方針を決める（8 slot、既定macroなし）
+- [x] 既存BT ClearコンボをCompile-time Defaultとして維持する
+- [x] Macro／Comboの上限をRAM使用量に合わせて設定する
+- [x] Input StreamをUnlock必須の本番機能として有効化する
+- [x] Runtime Combo独自RPCをStudio Unlockで保護する
+- [x] Factory ResetでRuntime設定が消去されることを自動確認する
 
 ### 自動検証
 
-- [ ] Macro／Combo／Input Stream有効版がビルド成功する
-- [ ] 既存コンボのDevicetree定義が維持されている
-- [ ] RPC bufferが最大payloadを収容できる
-- [ ] 上流のFirmware／Web UIテストのうち実行可能なものが成功する
-- [ ] RAM／Flash使用量が許容範囲内である
+- [x] Macro／Combo／Input Stream有効版がビルド成功する
+- [x] 既存コンボのDevicetree定義が維持されている
+- [x] RPC bufferが最大request payloadを収容でき、大きなresponseを逐次送信できる
+- [x] 上流のFirmware／Web UIテストのうち実行可能なものが成功する
+- [x] RAM／Flash使用量が許容範囲内である
+- [ ] GitHub Actionsで4成果物がクリーンビルド成功する
+- [ ] ローカルとCIの4成果物がSHA-256で完全一致する
 
 ### ユーザー実機確認 — まとめて1回
 
@@ -339,6 +342,10 @@ Codexの全ビルド成功後に、互換性確認を1回だけ依頼する。
 
 - [ ] `DYA Studioのマクロとコンボ編集に対応`
 - [ ] 実機確認後に必要なら `マクロとコンボの実機確認結果を反映`
+
+設計、固定依存、設定値、Studio Lock保護、CRC16移行、上流テスト、サイズ、
+SHA-256、初回書き込みと実機確認手順は
+[`docs/dya-studio/phase5.md`](docs/dya-studio/phase5.md) に記録する。
 
 ---
 

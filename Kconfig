@@ -11,3 +11,12 @@ config TORABO_TSUKI_LP_SPLIT_POWER_MGMT
       無操作時間に応じて、左右間BLEの接続間隔を段階的に変更します。
       Zephyr 4.1環境では左Peripheralが切断される可能性があるため、
       安全性を優先して既定では無効にし、ZMK標準の省電力処理を使用します。
+
+config TORABO_TSUKI_LP_SECURE_RUNTIME_COMBO_RPC
+    bool "Runtime Combo画面をStudio Unlockで保護"
+    default y
+    depends on ZMK_RUNTIME_COMBO_STUDIO_RPC
+    help
+      Runtime Comboの固定済み上流版では、画面のRPC全体がLock中も呼び出せます。
+      Torabo Tsuki LPでは安全性を優先し、一覧表示を含む画面全体を
+      Studio Unlock後だけ利用できるようにします。
