@@ -3,8 +3,8 @@
 最終更新: 2026-08-12
 対象ブランチ: `feature/dya-studio-full-support`
 起点: `dev/custom-dya` (`0b44ea6`)
-完了フェーズ: フェーズ3「ZMK Studioレベル1の完成」
-進行中フェーズ: フェーズ4「Custom Studio Protocolコア」
+完了フェーズ: フェーズ4「Custom Studio Protocolコア」
+進行中フェーズ: フェーズ5「Macro・Combo・Input Stream」の設計確認待ち
 次フェーズ: フェーズ5「Macro・Combo・Input Stream」
 
 ## 環境ルール
@@ -50,6 +50,8 @@ ZMK／Zephyrのローカルビルドは、WSL2からDockerを使用する。Wind
 - フェーズ4の4成果物はローカルDockerでクリーンビルド成功済み
 - 固定したCustom Settingsモジュールの公式テストは全件成功済み
 - DeviceTreeはフェーズ3と完全一致し、Settings ResetのUF2も完全一致
+- GitHub Actions run `31603615015` で4成果物のクリーンビルド成功済み
+- フェーズ4のCI成果物4件はローカル成果物とSHA-256で完全一致
 - フェーズ4の詳細は `docs/dya-studio/phase4.md` に記録済み
 
 ## 再開時の確認
@@ -100,6 +102,6 @@ DYA2形式では、共通依存を `config/west-dependency.yml`、単独利用�
 
 ## 次に行う作業
 
-1. フェーズ4の変更をコミットしてpushする
-2. GitHub Actionsの4成果物をローカル成果物と照合する
-3. フェーズ4を完了状態へ更新し、フェーズ5の設計確認へ進む
+1. フェーズ5で採用するRuntime Macro、Runtime Combo、Input Streamの現行仕様を再確認する
+2. 上限値、既定slot、Input Streamの本番版権限を含む設計方針を説明する
+3. ユーザーの設計確認後、フェーズ5を実装する

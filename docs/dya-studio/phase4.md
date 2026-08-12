@@ -130,4 +130,11 @@ OK
 
 ## CI確認結果
 
-コミット後にGitHub Actionsで4成果物をクリーンビルドし、ローカル成果物とのSHA-256一致を確認する。
+[GitHub Actions run `31603615015`](https://github.com/umecchi1098/zmk-keyboard-torabo-tsuki-lp/actions/runs/31603615015) が成功した。
+
+- クリーン環境からWest workspaceを初期化: 成功
+- 左Peripheral、右Central本番版、右Central開発版、Settings Resetのビルド: 成功
+- `build.yaml` から算出した期待数4件とUF2収集数の一致: 成功
+- `firmware` artifactの作成: 成功
+
+CI成果物4件をダウンロードし、上表のローカル成果物とSHA-256およびバイナリ内容が完全一致することを確認した。
