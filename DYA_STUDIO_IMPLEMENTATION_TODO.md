@@ -118,35 +118,35 @@
 
 ## フェーズ1: DYA用ZMK／Zephyrへの基盤更新
 
-状態: 未着手
+状態: 実装・ローカル検証完了（CI／実機確認待ち）
 
 ### Codex
 
-- [ ] DYA Studio現行ガイドの推奨ZMK／Zephyrを再確認する
-- [ ] `cormoran/zmk#main+dya` の採用候補SHAを記録する
-- [ ] `cormoran/zephyr#v4.1.0+zmk-fixes+nrf-half-duplex-uart` の採用候補SHAを記録する
-- [ ] `config/west.yml` を候補revisionへ更新する
-- [ ] DYA機能をまだ有効化せず、既存機能だけでビルドする
-- [ ] 次の既存依存のZephyr 4.1互換性を確認する
-  - [ ] `zmk-component-bmp-boost`
-  - [ ] `zmk-feature-status-led`
-  - [ ] `zmk-driver-paw3222`
-  - [ ] `zmk-driver-iqs7211e`
-  - [ ] `zmk-feature-cdc-acm-bootloader-trigger`
-  - [ ] `zmk-feature-non-lipo-battery-management`
-- [ ] 非互換があれば最小限の前方移植を行う
-- [ ] コンパイル警告と非推奨設定を整理する
-- [ ] 基準値とファームウェアサイズを比較する
+- [x] DYA Studio現行ガイドの推奨ZMK／Zephyrを再確認する
+- [x] `cormoran/zmk#main+dya` の採用候補SHAを記録する
+- [x] `cormoran/zephyr#v4.1.0+zmk-fixes+nrf-half-duplex-uart` の採用候補SHAを記録する
+- [x] `config/west.yml` を候補revisionへ更新する
+- [x] DYA機能をまだ有効化せず、既存機能だけでビルドする
+- [x] 次の既存依存のZephyr 4.1互換性を確認する
+  - [x] `zmk-component-bmp-boost`
+  - [x] `zmk-feature-status-led`
+  - [x] `zmk-driver-paw3222`
+  - [x] `zmk-driver-iqs7211e`
+  - [x] `zmk-feature-cdc-acm-bootloader-trigger`
+  - [x] `zmk-feature-non-lipo-battery-management`
+- [x] 非互換があれば最小限の前方移植を行う
+- [x] コンパイル警告と非推奨設定を整理する
+- [x] 基準値とファームウェアサイズを比較する
 
 ### 自動検証
 
-- [ ] 左Peripheralがクリーンビルド成功する
-- [ ] 右Centralがクリーンビルド成功する
-- [ ] Settings Resetがクリーンビルド成功する
-- [ ] PAW3222とIQS7211EのDevicetree nodeが生成物に存在する
-- [ ] `auto_mouse_layer` と既存input processor chainが生成物に存在する
-- [ ] 既存7レイヤーとPhysical Layoutが生成物に存在する
-- [ ] RAM／Flash使用量が許容範囲内である
+- [ ] 左Peripheralがクリーンビルド成功する（ローカルDocker成功、CI待ち）
+- [ ] 右Centralがクリーンビルド成功する（ローカルDocker成功、CI待ち）
+- [ ] Settings Resetがクリーンビルド成功する（ローカルDocker成功、CI待ち）
+- [x] PAW3222とIQS7211EのDevicetree nodeが生成物に存在する
+- [x] `auto_mouse_layer` と既存input processor chainが生成物に存在する
+- [x] 既存7レイヤーとPhysical Layoutが生成物に存在する
+- [x] RAM／Flash使用量が許容範囲内である
 
 ### ユーザー実機確認 — 必須ゲート
 
