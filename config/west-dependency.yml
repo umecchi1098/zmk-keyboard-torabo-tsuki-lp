@@ -62,5 +62,13 @@ manifest:
     - name: zmk-feature-non-lipo-battery-management
       remote: sekigon-gonnoc
       revision: bf024bb7872917f718a960d804136db5f9b88a31
+    # DYA Studioでキーマップを高速表示する、読み取り専用の拡張です。
+    - name: zmk-feature-fast-keymap
+      remote: cormoran
+      revision: 8dac76de0ba38588ba39ca498910e24f8332bc6b
+    # トラックボールやトラックパッドの位置をDYA Studioへ通知します。
+    - name: zmk-feature-module-physical-layout
+      remote: cormoran
+      revision: 4f18de45dc27820725d267916b4cdacc0e0b6cf9
   self:
     path: config

@@ -4,6 +4,14 @@
 * _centralがついているuf2をトラックボールがついている方に、_peripheralを反対側に書き込んでください
 * キーマップはkeymap-editorおよびzmk-studioで編集できます
 
+## DYA Studio
+
+[DYA Studio安定版](https://studio.dya.cormoran.works)をChromeまたはEdgeで開き、右CentralをUSB接続するとキーマップを編集できます。
+
+通常運用には `torabo_tsuki_lp_right_central.uf2` を使用してください。本番版は誤操作防止のStudio Lockが有効です。`Mid + Raise` でAdjustレイヤーへ入り、左上のキーを押すと編集を解除できます。
+
+`torabo_tsuki_lp_right_central_develop.uf2` はStudio Lockを無効にした開発・切り分け専用版です。通常運用には使用しないでください。対応済み機能と実機確認手順は[フェーズ3の検証記録](docs/dya-studio/phase3.md)を参照してください。
+
 ## 省電力設定について
 
 Zephyr 4.1環境では、旧customファーム由来の段階的な左右間BLE省電力処理を既定で無効にしています。無操作後に左Peripheralが操作不能になる問題が実機で発生したためで、修正版では接続が維持されることを確認済みです。

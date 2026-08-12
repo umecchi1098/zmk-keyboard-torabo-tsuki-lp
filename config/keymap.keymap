@@ -32,7 +32,7 @@
 #define JP_RBRACKET     BACKSLASH         // ]
 #define JP_LPAREN       ASTERISK          // (
 #define JP_RPAREN       LEFT_PARENTHESIS  // )
-#define JP_LBRACE       RIGHT_BRACE       // {  
+#define JP_LBRACE       RIGHT_BRACE       // {
 #define JP_RBRACE       PIPE              // }
 #define JP_KANA         LANGUAGE_1        // かな
 #define JP_EISU         LANGUAGE_2        // 英数
@@ -94,7 +94,7 @@
 &trans  &kp N1            &kp N2            &kp N3      &kp N4      &kp N5                                  &kp LEFT_BRACE  &kp MINUS      &kp EQUAL         &kp RIGHT_BRACE    &kp COLON      &kp JP_AT
 &trans  &kp N6            &kp N7            &kp N8      &kp N9      &kp N0      &kp JP_CARET  &kp JP_YEN    &kp LS(MINUS)   &kp LS(EQUAL)  &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp BACKSLASH  &trans
 &trans  &trans            &trans            &trans      &trans      &trans      &trans        &kp DEL       &kp RETURN      &none          &none             &trans             &trans         &trans
-            >; 
+            >;
         };
 
 // MID
@@ -136,11 +136,18 @@
         layer_6 {
             display-name = "Adjust";
             bindings = <
-&trans  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                  &bt BT_CLR_ALL  &trans     &trans     &trans     &trans  &trans
+&studio_unlock  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4          &bt BT_CLR_ALL  &trans     &trans     &trans     &trans  &trans
 &trans  &trans        &trans        &trans        &trans        &trans                        &bt BT_CLR      &trans     &trans     &trans     &trans  &trans
 &trans  &trans        &trans        &trans        &trans        &trans        &trans  &trans  &out OUT_TOG    &trans     &trans     &trans     &trans  &trans
 &trans  &trans        &trans        &trans        &trans        &trans        &trans  &trans  &trans          &none      &none      &trans     &trans  &trans
             >;
         };
+
+// DYA Studioから追加レイヤーを作成できるよう、末尾に空き領域を確保します。
+// 既存レイヤー0～6の番号や内容には影響しません。
+        extra_1 { status = "reserved"; };
+        extra_2 { status = "reserved"; };
+        extra_3 { status = "reserved"; };
+        extra_4 { status = "reserved"; };
     };
 };

@@ -16,3 +16,8 @@
         power-gpios = <&gpio0 8 (GPIO_ACTIVE_HIGH | NRF_GPIO_DRIVE_H0H1)>;
     };
 };
+
+// DYA Studioの物理レイアウトへ、現在使用中のトラックボールを表示します。
+&trackball_physical_layout {
+    status = "okay";
+};

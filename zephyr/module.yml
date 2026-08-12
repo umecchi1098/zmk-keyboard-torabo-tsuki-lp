@@ -4,4 +4,6 @@ build:
   kconfig: Kconfig
   settings:
     board_root: .
+    # このリポジトリ固有のDevicetree bindingとvendor prefixを読み込ませます。
+    dts_root: .
     snippet_root: .

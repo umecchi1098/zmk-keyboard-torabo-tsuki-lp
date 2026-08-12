@@ -1,0 +1,3 @@
+# DYA Studio用の物理レイアウト拡張が使用するvendor prefixです。
+# Zephyrへ名前を登録し、Devicetreeの未登録prefix警告を防ぎます。
+cormoran	Cormoran

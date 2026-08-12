@@ -49,10 +49,18 @@ jobs:
             cp "${firmware_file}" "artifacts/${artifact_name}.uf2"
           done < <(find ./build -type f -path '*/zephyr/zmk.uf2' -print | sort)
 
-          # 有効なビルド対象は左、右、Settings Resetの3件です。
+          # build.yamlの有効項目数とUF2数が一致することを確認します。
+          expected_count="$(python3 - <<'PY'
+          import pathlib
+          import yaml
+
+          matrix = yaml.safe_load(pathlib.Path("build.yaml").read_text(encoding="utf-8")) or {}
+          print(len(matrix.get("include", [])))
+          PY
+          )"
           artifact_count="$(find artifacts -maxdepth 1 -type f -name '*.uf2' | wc -l)"
-          if [[ "${artifact_count}" -ne 3 ]]; then
-            echo "ERROR: UF2成果物は3件必要ですが、${artifact_count}件でした。" >&2
+          if [[ "${artifact_count}" -ne "${expected_count}" ]]; then
+            echo "ERROR: UF2成果物は${expected_count}件必要ですが、${artifact_count}件でした。" >&2
             exit 1
           fi
 

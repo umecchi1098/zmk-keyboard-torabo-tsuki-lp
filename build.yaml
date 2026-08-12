@@ -14,6 +14,17 @@ include:
       - split-central
       - input-trackball
       - input-listener
+  # Studio機能の開発・診断時だけ使用する、Lock無効版です。
+  # 通常運用では上の本番用right_centralを使用してください。
+  - artifact: torabo_tsuki_lp_right_central_develop
+    board: bmp_boost/nrf52840
+    shield: torabo_tsuki_lp_right
+    snippets:
+      - studio-rpc-usb-uart
+      - split-central
+      - input-trackball
+      - input-listener
+    cmake-args: -DCONFIG_ZMK_STUDIO_LOCKING=n
   - artifact: settings_reset-bmp_boost-zmk
     board: bmp_boost/nrf52840
     shield: settings_reset

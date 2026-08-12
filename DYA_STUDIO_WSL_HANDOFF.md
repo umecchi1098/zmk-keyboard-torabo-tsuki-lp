@@ -4,7 +4,8 @@
 対象ブランチ: `feature/dya-studio-full-support`
 起点: `dev/custom-dya` (`0b44ea6`)
 完了フェーズ: フェーズ2「Manifest・CI・ビルドマトリクスの再構成」
-次フェーズ: フェーズ3「ZMK Studioレベル1の完成」
+進行中フェーズ: フェーズ3「ZMK Studioレベル1の完成」（自動検証完了・CI確認待ち）
+次フェーズ: フェーズ4「Custom Studio Protocolコア」
 
 ## 環境ルール
 
@@ -35,6 +36,12 @@ ZMK／Zephyrのローカルビルドは、WSL2からDockerを使用する。Wind
 - `zmk-west-commands` はビルド補助のみで、ファームウェア実行時コードを含まない
 - GitHub Actions run `31585497890` で3成果物のビルドとartifact収集が成功
 - Actions成果物3件はローカル生成物とSHA-256が完全一致
+- フェーズ3で本番用Studio Lock、Unlockキー、Reserved Layer 4層を追加済み
+- Fast KeymapとPhysical Layout RPCをSHA固定の外部モジュールで追加済み
+- 右Central開発版を `_develop` 成果物として分離済み
+- フェーズ3の4成果物はローカルDockerでクリーンビルド成功済み
+- 既存7レイヤー、接続安定化設定、Idle 30秒、Deep Sleep 150分の維持を自動確認済み
+- フェーズ3の詳細と実機確認手順は `docs/dya-studio/phase3.md` に記録済み
 
 ## 再開時の確認
 
@@ -84,7 +91,7 @@ DYA2形式では、共通依存を `config/west-dependency.yml`、単独利用�
 
 ## 次に行う作業
 
-1. フェーズ3開始時にDYA Studioの現行要件を再確認する
-2. 本番版のStudio Lockと、開発版のLock無効構成を分離して設計する
-3. Studio Unlockキー、Reserved Layer、Fast Keymap、Physical Layout RPCの変更範囲を確定する
-4. 自動検証後に、DYA Studioを使う実機確認手順をユーザーへ提示する
+1. フェーズ3コミットをpushし、GitHub Actionsの4成果物ビルドを確認する
+2. CI成功後、本番用右Centralの実機書き込みとDYA Studio確認をユーザーへ依頼する
+3. 実機確認結果を記録してフェーズ3を完了する
+4. フェーズ4の現行外部モジュール要件を再調査する

@@ -205,7 +205,7 @@
     //     position_map_m_1 {
     //         physical-layout = <&physical_layout_m>;
     //         positions = <
-    //             0  1  2  3  4  5        6  7  8  9  10 11 
+    //             0  1  2  3  4  5        6  7  8  9  10 11
     //             12 13 14 15 16 17       18 19 20 21 22 23
     //             24 25 26 27 28 29 30 31 32 33 34 35 36 37
     //             38 39 40 41 42 43 44 45 46 47 48 49 50 51
@@ -224,6 +224,7 @@
 
     position_map_1 {
         compatible = "zmk,physical-layout-position-map";
+        complete;
         position_map_m_1 {
             physical-layout = <&physical_layout_m>;
             positions = <
@@ -233,5 +234,32 @@
                 38 39 40 41 42 43 44 45 46 47 48 49 50 51
             >;
         };
+    };
+
+    // トラックボール位置はケース上で調整できるため、右親指付近の代表位置を表示します。
+    // 実際にトラックボール用snippetを使う場合だけ有効になります。
+    trackball_physical_layout: trackball_physical_layout {
+        compatible = "cormoran,physical-layout-trackball";
+        status = "disabled";
+        display-name = "Trackball";
+        size = <190>;
+        x = <875>;
+        y = <475>;
+        linked-device-identifiers = "pointing_device";
+        linked-subsystems = "zmk__pointing";
+    };
+
+    // オプションの円形トラックパッドは、電池カバー上の代表位置を表示します。
+    // トラックパッド用snippetを使う場合だけ有効になります。
+    trackpad_physical_layout: trackpad_physical_layout {
+        compatible = "cormoran,physical-layout-touch-pad";
+        status = "disabled";
+        display-name = "Trackpad";
+        width = <300>;
+        height = <300>;
+        x = <1175>;
+        y = <475>;
+        linked-device-identifiers = "pointing_device";
+        linked-subsystems = "zmk__pointing";
     };
 };

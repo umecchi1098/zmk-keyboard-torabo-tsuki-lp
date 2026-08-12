@@ -19,3 +19,8 @@
         scroller-mode;
     };
 };
+
+// DYA Studioの物理レイアウトへ、現在使用中のトラックパッドを表示します。
+&trackpad_physical_layout {
+    status = "okay";
+};

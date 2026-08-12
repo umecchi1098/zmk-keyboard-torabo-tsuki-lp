@@ -17,24 +17,24 @@
 
 ## 運用ルール
 
-- [ ] 調査、設計、編集、静的検査、Git操作は、リポジトリを安全に扱える環境で進めてよい
-- [ ] ZMK／Zephyrのローカルビルドは、WSL2から公式ZMK Dockerイメージを使用する構成を標準とする
-- [ ] WSL Dockerが利用できない場合も編集作業は継続できるが、ローカルビルド項目を成功扱いにしない
-- [ ] Windowsネイティブ環境へZMK／Zephyrツールチェーンを直接導入しない
-- [ ] ローカルDockerビルドは高速な反復確認に使用し、最終的な自動検証と配布用成果物はCI/CDを正とする
-- [ ] ローカルビルド成功だけではフェーズの最終合格にせず、該当するPull Requestまたは既定ブランチのCI成功を確認する
-- [ ] CI/CDではクリーン環境から `build.yaml` の必須成果物をすべてビルドする
-- [ ] 作業再開時は、先に `DYA_STUDIO_WSL_HANDOFF.md` と `DOCKER_BUILD.md` を確認する
-- [ ] 実装中は、このファイルを各フェーズの開始時・検証時・完了時に更新する
-- [ ] 各フェーズの変更は、ほかのフェーズと混ぜずに日本語のコミットメッセージでコミットする
-- [ ] コード変更前に作業ツリーを確認し、ユーザーの未コミット変更を保持する
-- [ ] DYA Studio、ZMK、Zephyr、外部モジュールの仕様は、実装するフェーズの開始時に公式情報を再確認する
-- [ ] `main` 等の可変ブランチは調査・試作にのみ使い、採用時は実機検証済みコミットSHAへ固定する
-- [ ] 各フェーズで、可能な限りビルド・静的検査・テストをCodexが完了してから実機確認を依頼する
-- [ ] 実機確認が必要なフェーズは、Codexの自動検証がすべて成功するまでユーザーへ依頼しない
-- [ ] 実機確認待ちの場合は、チェックを未完了のまま残し、結果・使用ファームウェア・確認日を記録する
-- [ ] 実機確認で重大な回帰があった場合は次フェーズへ進まず、そのフェーズ内で修正する
-- [ ] 各フェーズのコミット前に本ファイルの進捗を更新する
+- [x] 調査、設計、編集、静的検査、Git操作は、リポジトリを安全に扱える環境で進めてよい
+- [x] ZMK／Zephyrのローカルビルドは、WSL2から公式ZMK Dockerイメージを使用する構成を標準とする
+- [x] WSL Dockerが利用できない場合も編集作業は継続できるが、ローカルビルド項目を成功扱いにしない
+- [x] Windowsネイティブ環境へZMK／Zephyrツールチェーンを直接導入しない
+- [x] ローカルDockerビルドは高速な反復確認に使用し、最終的な自動検証と配布用成果物はCI/CDを正とする
+- [x] ローカルビルド成功だけではフェーズの最終合格にせず、該当するPull Requestまたは既定ブランチのCI成功を確認する
+- [x] CI/CDではクリーン環境から `build.yaml` の必須成果物をすべてビルドする
+- [x] 作業再開時は、先に `DYA_STUDIO_WSL_HANDOFF.md` と `DOCKER_BUILD.md` を確認する
+- [x] 実装中は、このファイルを各フェーズの開始時・検証時・完了時に更新する
+- [x] 各フェーズの変更は、ほかのフェーズと混ぜずに日本語のコミットメッセージでコミットする
+- [x] コード変更前に作業ツリーを確認し、ユーザーの未コミット変更を保持する
+- [x] DYA Studio、ZMK、Zephyr、外部モジュールの仕様は、実装するフェーズの開始時に公式情報を再確認する
+- [x] `main` 等の可変ブランチは調査・試作にのみ使い、採用時は実機検証済みコミットSHAへ固定する
+- [x] 各フェーズで、可能な限りビルド・静的検査・テストをCodexが完了してから実機確認を依頼する
+- [x] 実機確認が必要なフェーズは、Codexの自動検証がすべて成功するまでユーザーへ依頼しない
+- [x] 実機確認待ちの場合は、チェックを未完了のまま残し、結果・使用ファームウェア・確認日を記録する
+- [x] 実機確認で重大な回帰があった場合は次フェーズへ進まず、そのフェーズ内で修正する
+- [x] 各フェーズのコミット前に本ファイルの進捗を更新する
 
 ### 担当表記
 
@@ -52,9 +52,9 @@
 
 ## 現状維持の必須要件
 
-- [ ] Mレイアウトを既定として維持する
-- [ ] 52キーの位置とPhysical Layoutの対応を維持する
-- [ ] 既存7レイヤーの番号と役割を維持する
+- [x] Mレイアウトを既定として維持する
+- [x] 52キーの位置とPhysical Layoutの対応を維持する
+- [x] 既存7レイヤーの番号と役割を維持する
   - `0`: Base
   - `1`: Mouse
   - `2`: Lower
@@ -62,17 +62,17 @@
   - `4`: Raise
   - `5`: Scroll
   - `6`: Adjust
-- [ ] 日本語キーボード用のキー変換定義を維持する
-- [ ] `MID + RAISE -> ADJUST` のConditional Layerを維持する
-- [ ] Bluetoothクリアコンボを維持する
-- [ ] 左右のAuto Mouse設定を維持する
+- [x] 日本語キーボード用のキー変換定義を維持する
+- [x] `MID + RAISE -> ADJUST` のConditional Layerを維持する
+- [x] Bluetoothクリアコンボを維持する
+- [x] 左右のAuto Mouse設定を維持する
   - 左: Mouseレイヤー1、解除800ms
   - 右: Mouseレイヤー1、解除500ms
-- [ ] Scrollレイヤー5、X軸反転、スクロール倍率 `1/64` を維持する
-- [ ] マウスボタン4・5を維持する
-- [ ] PAW3222、IQS7211E、Split Inputの既存構成を維持する
-- [ ] Status LED、CDC ACM Bootloader Trigger、非LiPo電池管理を維持する
-- [ ] 左Peripheral＋右Centralを既定の配布構成として維持する
+- [x] Scrollレイヤー5、X軸反転、スクロール倍率 `1/64` を維持する
+- [x] マウスボタン4・5を維持する
+- [x] PAW3222、IQS7211E、Split Inputの既存構成を維持する
+- [x] Status LED、CDC ACM Bootloader Trigger、非LiPo電池管理を維持する
+- [x] 左Peripheral＋右Centralを既定の配布構成として維持する
 
 ---
 
@@ -214,31 +214,31 @@ Codexの全ビルド成功後に、互換性確認を1回だけ依頼する。
 
 ## フェーズ3: ZMK Studioレベル1の完成
 
-状態: 未着手
+状態: 自動検証完了・CI確認待ち
 
 ### Codex
 
-- [ ] `CONFIG_ZMK_STUDIO_LOCKING=n` を本番設定から削除する
-- [ ] Adjustレイヤーの安全な位置へ `&studio_unlock` を追加する
-- [ ] 既存7レイヤーの番号を維持する
-- [ ] Studio用のReserved Layerを末尾へ追加する
-- [ ] Reserved Layer数をDYA Studioの現行要件に合わせる
-- [ ] M Physical Layoutと52キーのposition mapを検証する
-- [ ] `zmk-feature-fast-keymap` を追加する
-- [ ] Fast KeymapのRPCとDefault Layer読取を有効にする
-- [ ] `zmk-feature-module-physical-layout` を追加する
-- [ ] トラックボール／トラックパッドの物理表示nodeを追加する
-- [ ] 開発用にStudio Lock無効版を別成果物として用意する
+- [x] `CONFIG_ZMK_STUDIO_LOCKING=n` を本番設定から削除する
+- [x] Adjustレイヤーの安全な位置へ `&studio_unlock` を追加する
+- [x] 既存7レイヤーの番号を維持する
+- [x] Studio用のReserved Layerを末尾へ追加する
+- [x] Reserved Layer数をDYA Studioの現行要件に合わせる（DYA2参照実装と同じ4層）
+- [x] M Physical Layoutと52キーのposition mapを検証する
+- [x] `zmk-feature-fast-keymap` を追加する
+- [x] Fast KeymapのRPCとDefault Layer読取を有効にする
+- [x] `zmk-feature-module-physical-layout` を追加する
+- [x] トラックボール／トラックパッドの物理表示nodeを追加する
+- [x] 開発用にStudio Lock無効版を別成果物として用意する
 
 ### 自動検証
 
-- [ ] 本番版でStudio Lockが有効である
-- [ ] 開発版だけStudio Lockが無効である
-- [ ] `&studio_unlock` が期待するキー位置にある
-- [ ] 既存7レイヤーの内容と番号が変わっていない
-- [ ] Reserved Layerが既存レイヤーの後ろにある
-- [ ] Fast KeymapとPhysical Layout RPCが有効である
-- [ ] 全成果物がビルド成功する
+- [x] 本番版でStudio Lockが有効である
+- [x] 開発版だけStudio Lockが無効である
+- [x] `&studio_unlock` が期待するキー位置にある
+- [x] 既存7レイヤーの内容と番号が変わっていない（Adjustの解除キー1個を除く）
+- [x] Reserved Layerが既存レイヤーの後ろにある
+- [x] Fast KeymapとPhysical Layout RPCが有効である
+- [x] 全成果物がローカルDockerでクリーンビルド成功する
 
 ### ユーザー実機確認 — 必須ゲート
 
@@ -253,6 +253,9 @@ Codexの全ビルド成功後に、互換性確認を1回だけ依頼する。
 
 - [ ] `ZMK Studioの安全なキーマップ編集に対応`
 - [ ] 実機確認後に必要なら `ZMK Studio実機確認結果を反映`
+
+自動検証、既知の警告、サイズ、SHA-256、実機確認手順は
+[`docs/dya-studio/phase3.md`](docs/dya-studio/phase3.md) に記録する。
 
 ---
 
