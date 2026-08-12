@@ -124,7 +124,8 @@ Settings Resetは`west update`中に複数のGitHubリポジトリで証明書�
 
 左PeripheralとSettings ResetのSHA-256は修正前と同じである。右Centralだけが変更され、修正前よりUF2は1,536バイト、Flashは724バイト、RAMは104バイト減少した。
 
+[GitHub Actions #15](https://github.com/umecchi1098/zmk-keyboard-torabo-tsuki-lp/actions/runs/31580789957)でも3成果物のビルド、Kconfig・Devicetree検査、成果物統合がすべて成功した。配布用`firmware`に含まれるUF2サイズはローカル結果と一致した。実機確認に使用する右CentralのSHA-256は`0c2fdbc7367850637f5f8dabd80d99627a31a929f915d51791a019140f061f31`。
+
 ## 未完了ゲート
 
-- 独自省電力処理を無効化した3成果物をGitHub Actionsでビルドする
 - 修正版の右Centralを書き込み、電池駆動で1分以上放置後も左キーが入力できることを確認する
