@@ -3,9 +3,9 @@
 最終更新: 2026-08-12
 対象ブランチ: `feature/dya-studio-full-support`
 起点: `dev/custom-dya` (`0b44ea6`)
-完了フェーズ: フェーズ2「Manifest・CI・ビルドマトリクスの再構成」
-進行中フェーズ: フェーズ3「ZMK Studioレベル1の完成」（自動検証完了・実機確認待ち）
-次フェーズ: フェーズ4「Custom Studio Protocolコア」
+完了フェーズ: フェーズ3「ZMK Studioレベル1の完成」
+進行中フェーズ: フェーズ4「Custom Studio Protocolコア」
+次フェーズ: フェーズ5「Macro・Combo・Input Stream」
 
 ## 環境ルール
 
@@ -44,6 +44,7 @@ ZMK／Zephyrのローカルビルドは、WSL2からDockerを使用する。Wind
 - CI成果物4件はローカル成果物とSHA-256が完全一致
 - 既存7レイヤー、接続安定化設定、Idle 30秒、Deep Sleep 150分の維持を自動確認済み
 - フェーズ3の詳細と実機確認手順は `docs/dya-studio/phase3.md` に記録済み
+- DYA StudioでLock、Unlock、保存、トラックボール表示・動作の実機確認が完了
 
 ## 再開時の確認
 
@@ -93,6 +94,6 @@ DYA2形式では、共通依存を `config/west-dependency.yml`、単独利用�
 
 ## 次に行う作業
 
-1. 本番用右Centralの実機書き込みとDYA Studio確認をユーザーへ依頼する
-2. 実機確認結果を記録してフェーズ3を完了する
-3. フェーズ4の現行外部モジュール要件を再調査する
+1. `zmk-feature-custom-settings` を検証済みSHAへ固定する
+2. 左右のSplit Relayと右CentralだけのCustom Settings RPCを設定する
+3. 上流テスト、4成果物ビルド、回帰比較、CIを実行する
