@@ -45,6 +45,12 @@ ZMK／Zephyrのローカルビルドは、WSL2からDockerを使用する。Wind
 - 既存7レイヤー、接続安定化設定、Idle 30秒、Deep Sleep 150分の維持を自動確認済み
 - フェーズ3の詳細と実機確認手順は `docs/dya-studio/phase3.md` に記録済み
 - DYA StudioでLock、Unlock、保存、トラックボール表示・動作の実機確認が完了
+- フェーズ4でCustom Settingsコアを確認済みSHAへ固定済み
+- Split Relayを左右、Custom Settings Studio RPCを右Centralだけで有効化済み
+- フェーズ4の4成果物はローカルDockerでクリーンビルド成功済み
+- 固定したCustom Settingsモジュールの公式テストは全件成功済み
+- DeviceTreeはフェーズ3と完全一致し、Settings ResetのUF2も完全一致
+- フェーズ4の詳細は `docs/dya-studio/phase4.md` に記録済み
 
 ## 再開時の確認
 
@@ -94,6 +100,6 @@ DYA2形式では、共通依存を `config/west-dependency.yml`、単独利用�
 
 ## 次に行う作業
 
-1. `zmk-feature-custom-settings` を検証済みSHAへ固定する
-2. 左右のSplit Relayと右CentralだけのCustom Settings RPCを設定する
-3. 上流テスト、4成果物ビルド、回帰比較、CIを実行する
+1. フェーズ4の変更をコミットしてpushする
+2. GitHub Actionsの4成果物をローカル成果物と照合する
+3. フェーズ4を完了状態へ更新し、フェーズ5の設計確認へ進む

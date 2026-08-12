@@ -70,5 +70,9 @@ manifest:
     - name: zmk-feature-module-physical-layout
       remote: cormoran
       revision: 4f18de45dc27820725d267916b4cdacc0e0b6cf9
+    # DYA Studio向け設定を型・権限付きで管理し、左右へ中継する基盤です。
+    - name: zmk-feature-custom-settings
+      remote: cormoran
+      revision: c6a7fef3a3be3d3ace5de9a4b0628c6418cd1f3f
   self:
     path: config

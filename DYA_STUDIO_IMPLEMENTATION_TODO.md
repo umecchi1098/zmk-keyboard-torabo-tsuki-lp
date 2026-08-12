@@ -263,28 +263,31 @@ Codexの全ビルド成功後に、互換性確認を1回だけ依頼する。
 
 ## フェーズ4: Custom Studio Protocolコア
 
-状態: 設計承認済み・実装中
+状態: ローカル自動検証完了・CI待ち
 
 ### Codex
 
-- [ ] `zmk-feature-custom-settings` を追加する
-- [ ] Split Relayを左右で有効にする
-- [ ] Custom Settings RPCをCentralだけで有効にする
-- [ ] `zmk-feature-fast-keymap` のDYA拡張設定を確定する
-- [ ] スタック／バッファ設定を追加する
-- [ ] KSCAN Diagnosticsを見越し、Split Relay payloadを256で検証する
-- [ ] 保存デバウンスを設定する
-- [ ] Memory Only／Save／Discard／Resetの利用方針を文書化する
-- [ ] 本番版では保護対象の読み書きにUnlockを要求する
+- [x] `zmk-feature-custom-settings` を追加する
+- [x] Split Relayを左右で有効にする
+- [x] Custom Settings RPCをCentralだけで有効にする
+- [x] `zmk-feature-fast-keymap` のDYA拡張設定を確定する
+- [x] スタック／バッファ設定を追加する
+- [x] 現行DYA2に合わせてSplit Relay payloadを240にし、実データ238バイトの制約を記録する
+- [x] KSCAN Diagnostics追加時にSplit Relay payloadを再評価する方針を記録する
+- [x] 保存デバウンスを設定する
+- [x] Memory Only／Save／Discard／Resetの利用方針を文書化する
+- [x] 本番版では保護対象の読み書きにUnlockを要求する方針を文書化する
 
 ### 自動検証
 
-- [ ] Central／PeripheralのKconfig依存が正しい
-- [ ] Peripheralへ不要なStudio RPCがリンクされていない
-- [ ] 左右のビルドが成功する
-- [ ] RAM／Flash使用量をフェーズ3と比較する
-- [ ] Custom Settingsのモジュールテストまたは利用可能な上流テストを実行する
-- [ ] 設定リセット用成果物がビルドできる
+- [x] Central／PeripheralのKconfig依存が正しい
+- [x] Peripheralへ不要なStudio RPCがリンクされていない
+- [x] 左右のビルドが成功する
+- [x] RAM／Flash使用量をフェーズ3と比較する
+- [x] Custom Settingsのモジュールテストまたは利用可能な上流テストを実行する
+- [x] 設定リセット用成果物がビルドできる
+- [ ] GitHub Actionsで4成果物がクリーンビルド成功する
+- [ ] ローカルとCIの4成果物がSHA-256で完全一致する
 
 ### ユーザー実機確認
 
@@ -292,7 +295,10 @@ Codexの全ビルド成功後に、互換性確認を1回だけ依頼する。
 
 ### コミット
 
-- [ ] `Custom Studio Protocolの基盤を追加`
+- [x] `Custom Studio Protocolの基盤を追加`
+
+設計、設定値、上流テスト、サイズ、SHA-256、権限と保存操作の方針は
+[`docs/dya-studio/phase4.md`](docs/dya-studio/phase4.md) に記録する。
 
 ---
 
