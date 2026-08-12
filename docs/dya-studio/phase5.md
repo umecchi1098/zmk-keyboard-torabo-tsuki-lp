@@ -55,7 +55,7 @@ Runtime Macroは、ロック中の一覧表示だけを許可し、内容の取�
 
 固定したRuntime Combo上流版は、Custom Settings側の書き込み権限をSecureに設定している一方、独自RPC subsystemをUnsecuredとして登録していた。独自RPCが汎用Custom Settingsの権限検査を通らないため、そのままではStudio Lockを迂回して編集できる。
 
-このキーボードでは、起動時にRuntime Combo subsystem全体をSecureへ変更するフェイルセーフを追加した。上流の公開symbolを直接参照し、固定識別子も検査する。上流構造や識別子が変わった場合は、リンク時または起動時に失敗し、意図せず無保護にはならない。本番版では一覧表示を含め、Runtime Combo画面の利用にUnlockが必要である。
+このキーボードでは、起動時にRuntime Combo subsystem全体をSecureへ変更するフェイルセーフを追加した。最初にSecureへ変更してから固定識別子を検査し、上流の公開symbolも直接参照する。識別子が変わった場合もSecure状態を維持し、symbolが変わった場合はリンクを失敗させるため、意図せず無保護にはならない。本番版では一覧表示を含め、Runtime Combo画面の利用にUnlockが必要である。
 
 ## Behavior IDの移行
 

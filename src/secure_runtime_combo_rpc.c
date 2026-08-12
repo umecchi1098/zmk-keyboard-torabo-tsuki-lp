@@ -52,13 +52,18 @@ static int secure_runtime_combo_rpc_init(void) {
   struct torabo_rpc_custom_subsystem *subsystem =
       &zmk_rpc_custom_subsystem_cormoran__runtime_combo;
 
+  /*
+   * 識別子検査が失敗した場合も無保護にならないよう、
+   * 最初にSecureへ変更します。
+   */
+  subsystem->meta->security = TORABO_RPC_SECURED;
+
   if (strcmp(subsystem->identifier, RUNTIME_COMBO_SUBSYSTEM_ID) != 0) {
     LOG_ERR("Unexpected Runtime Combo RPC subsystem: %s",
             subsystem->identifier);
     return -EINVAL;
   }
 
-  subsystem->meta->security = TORABO_RPC_SECURED;
   LOG_INF("Runtime Combo RPC requires Studio Unlock");
   return 0;
 }
