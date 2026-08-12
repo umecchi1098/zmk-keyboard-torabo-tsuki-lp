@@ -3,8 +3,7 @@
 最終更新: 2026-08-12
 対象ブランチ: `feature/dya-studio-full-support`
 起点: `dev/custom-dya` (`0b44ea6`)
-完了フェーズ: フェーズ1「DYA用ZMK／Zephyrへの基盤更新」
-進行中フェーズ: フェーズ2「Manifest・CI・ビルドマトリクスの再構成」
+完了フェーズ: フェーズ2「Manifest・CI・ビルドマトリクスの再構成」
 次フェーズ: フェーズ3「ZMK Studioレベル1の完成」
 
 ## 環境ルール
@@ -22,7 +21,7 @@ ZMK／Zephyrのローカルビルドは、WSL2からDockerを使用する。Wind
 - フェーズ1はローカルDocker、GitHub Actions、実機回帰確認を含めて完了
 - 左Peripheral切断問題への安定化対応として、旧custom由来の左右間BLE省電力処理は既定で無効
 - ZMK標準のIdle（30秒）とDeep Sleep（150分）は有効なまま
-- フェーズ2のManifest、ローカルビルド、CI再構成は実装済み
+- フェーズ2のManifest、ローカルビルド、CI再構成は検証を含めて完了
 - 現行用とDYA用を分離した `compose.yaml` とローカルビルドスクリプトを追加済み
 - 現行用Dockerイメージ: `zmkfirmware/zmk-dev-arm:3.5`
 - DYA用ローカルDockerイメージ: `zmkfirmware/zmk-dev-arm:4.1-branch`
@@ -34,7 +33,8 @@ ZMK／Zephyrのローカルビルドは、WSL2からDockerを使用する。Wind
 - 基準値は `docs/dya-studio/baseline.md` に記録済み
 - フェーズ2の旧安定版比較では、機能Kconfig、DeviceTree、text、BSSが一致
 - `zmk-west-commands` はビルド補助のみで、ファームウェア実行時コードを含まない
-- フェーズ2のGitHub Actions結果はコミット・push後に確認する
+- GitHub Actions run `31585497890` で3成果物のビルドとartifact収集が成功
+- Actions成果物3件はローカル生成物とSHA-256が完全一致
 
 ## 再開時の確認
 
@@ -84,8 +84,7 @@ DYA2形式では、共通依存を `config/west-dependency.yml`、単独利用�
 
 ## 次に行う作業
 
-1. フェーズ2の変更をコミットしてpushする
-2. GitHub Actionsで3成果物と成果物名を確認する
-3. フェーズ2の結果を `docs/dya-studio/phase2.md` と実装ToDoへ反映する
-4. フェーズ3開始時にDYA Studioの現行要件を再確認する
-5. 本番版のStudio Lockと、開発版のLock無効構成を分離して設計する
+1. フェーズ3開始時にDYA Studioの現行要件を再確認する
+2. 本番版のStudio Lockと、開発版のLock無効構成を分離して設計する
+3. Studio Unlockキー、Reserved Layer、Fast Keymap、Physical Layout RPCの変更範囲を確定する
+4. 自動検証後に、DYA Studioを使う実機確認手順をユーザーへ提示する

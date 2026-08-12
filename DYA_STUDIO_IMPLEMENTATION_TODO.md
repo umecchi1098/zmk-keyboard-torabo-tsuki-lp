@@ -180,7 +180,7 @@ Codexの全ビルド成功後に、互換性確認を1回だけ依頼する。
 
 ## フェーズ2: Manifest・CI・ビルドマトリクスの再構成
 
-状態: 自動検証中（ローカル完了、GitHub Actions確認待ち）
+状態: 完了
 
 ### Codex
 
@@ -199,7 +199,7 @@ Codexの全ビルド成功後に、互換性確認を1回だけ依頼する。
 - [x] ローカルのstandalone構成でwest初期化できる
 - [x] 左Peripheral、右Central、Settings Resetを一括ビルドできる
 - [x] CI用YAMLの構文が正しい
-- [ ] GitHub Actionsが成功する
+- [x] GitHub Actionsが成功する（Actions run `31585497890`）
 - [x] 成果物に対象を識別できる名前が付く
 
 ### ユーザー実機確認
@@ -208,7 +208,7 @@ Codexの全ビルド成功後に、互換性確認を1回だけ依頼する。
 
 ### コミット
 
-- [ ] `DYA対応向けにManifestとCIを再構成`
+- [x] `DYA対応向けにManifestとCIを再構成`
 
 ---
 

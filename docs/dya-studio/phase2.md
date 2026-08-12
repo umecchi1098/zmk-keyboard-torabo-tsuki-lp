@@ -57,14 +57,28 @@ Kconfigの全設定行を比較すると、差は自動生成された `CONFIG_Z
 
 左右UF2のハッシュとdataサイズは、補助モジュールの登録に伴う生成情報・配置の変化により一致しない。一方、命令領域のサイズ、BSS、DeviceTree、既存の全機能Kconfigは一致しているため、フェーズ1で確認したキー入力・ポインター・分割接続・省電力の動作仕様は変更していないと判断する。
 
-## CI確認
+## CI確認結果
 
-コミット・push後にGitHub Actionsで次を確認する。
+GitHub Actions run `31585497890` が成功した。
 
-- クリーン環境からWest workspaceを初期化できる
-- 3構成がすべてビルド成功する
-- `firmware` artifactに3つのUF2が含まれる
-- UF2名から左Peripheral、右Central、Settings Resetを識別できる
+- クリーン環境からWest workspaceを初期化: 成功
+- 3構成の一括ビルド: 成功
+- `firmware` artifactへの3つのUF2収集: 成功
+- 成果物名による左Peripheral、右Central、Settings Resetの識別: 成功
+
+Actions成果物をダウンロードし、3件ともローカル生成物とSHA-256が完全一致することを確認した。
+
+| 成果物 | SHA-256 |
+| --- | --- |
+| `torabo_tsuki_lp_left_peripheral.uf2` | `5e36cafe2c7a9c4d3e7f382fe07d4be2e309bc46deffa19a534a1190950c9b77` |
+| `torabo_tsuki_lp_right_central.uf2` | `cbe32ce0a7a48e5e09ed3dd9b7e5f50e77d4e0b9637e4a206404027c1bd28e68` |
+| `settings_reset-bmp_boost-zmk.uf2` | `1481398b551dd7b1032c9d86b2966ba579b77cac3b1302fad95203727221cfeb` |
+
+初回runでGitHub ActionsのNode.js 20廃止警告を確認したため、各公式ActionをNode.js 24対応版へ更新した。
+
+- `actions/checkout@v6`
+- `actions/cache@v5`
+- `actions/upload-artifact@v7`
 
 ## ユーザー確認
 
