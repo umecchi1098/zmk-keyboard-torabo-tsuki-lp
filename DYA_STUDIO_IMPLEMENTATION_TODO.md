@@ -1,9 +1,13 @@
 # DYA Studio フル対応 実装 ToDo
 
 最終更新: 2026-08-12  
-起点ブランチ: `dev/custom-dya`  
+起点ブランチ: `dev/custom-dya` (`0b44ea6`)
+実装ブランチ: `feature/dya-studio-full-support`
 対象キーボード: Torabo Tsuki LP  
 対象DYA Studio: 安定版を基準とし、実装開始時にバージョンを再確認する
+
+引き継ぎ資料: [`DYA_STUDIO_WSL_HANDOFF.md`](DYA_STUDIO_WSL_HANDOFF.md)
+ローカルビルド: [`DOCKER_BUILD.md`](DOCKER_BUILD.md)
 
 ## 目的
 
@@ -13,6 +17,14 @@
 
 ## 運用ルール
 
+- [ ] 調査、設計、編集、静的検査、Git操作は、リポジトリを安全に扱える環境で進めてよい
+- [ ] ZMK／Zephyrのローカルビルドは、WSL2から公式ZMK Dockerイメージを使用する構成を標準とする
+- [ ] WSL Dockerが利用できない場合も編集作業は継続できるが、ローカルビルド項目を成功扱いにしない
+- [ ] Windowsネイティブ環境へZMK／Zephyrツールチェーンを直接導入しない
+- [ ] ローカルDockerビルドは高速な反復確認に使用し、最終的な自動検証と配布用成果物はCI/CDを正とする
+- [ ] ローカルビルド成功だけではフェーズの最終合格にせず、該当するPull Requestまたは既定ブランチのCI成功を確認する
+- [ ] CI/CDではクリーン環境から `build.yaml` の必須成果物をすべてビルドする
+- [ ] 作業再開時は、先に `DYA_STUDIO_WSL_HANDOFF.md` と `DOCKER_BUILD.md` を確認する
 - [ ] 実装中は、このファイルを各フェーズの開始時・検証時・完了時に更新する
 - [ ] 各フェーズの変更は、ほかのフェーズと混ぜずに日本語のコミットメッセージでコミットする
 - [ ] コード変更前に作業ツリーを確認し、ユーザーの未コミット変更を保持する
@@ -66,27 +78,32 @@
 
 ## フェーズ0: ベースラインの固定
 
-状態: 未着手
+状態: 作業中
 
 ### Codex
 
-- [ ] 実装用ブランチを `dev/custom-dya` から作成する
-- [ ] 起点コミット、リモート参照、DYA Studio安定版を記録する
-- [ ] 現在有効な `build.yaml` の成果物を一覧化する
-- [ ] 現在のキーマップ、Devicetree、Kconfig、snippet構成を記録する
-- [ ] 既存挙動の回帰チェックリストを作成する
-- [ ] 現行構成を変更せずにビルドできる環境を整える
-- [ ] 現行の左Peripheral、右Central、Settings Resetをビルドする
-- [ ] ビルドログ、UF2、ファームウェアサイズを基準値として保存する
-- [ ] 可能なら生成済み `.config` とDevicetreeを保存する
+- [x] 実装用ブランチを `dev/custom-dya` から作成する
+- [x] WSL2からDockerとDocker Compose v2を利用できることを確認する
+- [x] Dockerイメージ、West manifest、ビルドスクリプトのバージョンを基準記録へ残す
+- [x] 起点コミット、リモート参照、DYA Studio安定版を記録する
+- [x] 現在有効な `build.yaml` の成果物を一覧化する
+- [x] 現在のキーマップ、Devicetree、Kconfig、snippet構成を記録する
+- [x] 既存挙動の回帰チェックリストを作成する
+- [x] 公式ZMKイメージを使うWSL Dockerビルド構成を追加する
+- [x] WSL Dockerで、現行構成を変更せずにビルドできることを確認する
+- [x] 現行の左Peripheral、右Central、Settings Resetをビルドする
+- [x] ビルドログ、UF2、ファームウェアサイズを基準値として保存する
+- [x] 生成済み `.config` とDevicetreeを保存する
 
 ### 自動検証
 
-- [ ] 左Peripheralがビルド成功する
-- [ ] 右Centralがビルド成功する
-- [ ] Settings Resetがビルド成功する
-- [ ] 生成物名と対象board/shield/snippetが期待どおりである
-- [ ] 作業ツリーに意図しない生成物が追加されていない
+- [x] ローカルDockerで全成果物がビルド成功する
+- [ ] GitHub Actionsのクリーン環境で全成果物がビルド成功する
+- [x] 左Peripheralがビルド成功する
+- [x] 右Centralがビルド成功する
+- [x] Settings Resetがビルド成功する
+- [x] 生成物名と対象board/shield/snippetが期待どおりである
+- [x] 作業ツリーに意図しない生成物が追加されていない
 
 ### ユーザー実機確認
 
@@ -94,6 +111,7 @@
 
 ### コミット
 
+- [x] `WSL Dockerビルド環境を整備`（環境整備とローカル基準値の中間コミット）
 - [ ] `DYA Studio対応前の基準状態を整備`
 
 ---

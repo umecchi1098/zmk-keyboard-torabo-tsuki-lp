@@ -1,0 +1,37 @@
+name: torabo-tsuki-zmk
+
+x-zmk-common: &zmk-common
+  working_dir: /workspaces/west
+  entrypoint: ["/bin/bash", "/repo/scripts/docker/zmk-build-container.sh"]
+  volumes:
+    - .:/repo:ro
+    - ./.build:/output
+
+services:
+  baseline:
+    <<: *zmk-common
+    image: docker.io/zmkfirmware/zmk-dev-arm:3.5
+    environment:
+      HOST_UID: "${HOST_UID:-1000}"
+      HOST_GID: "${HOST_GID:-1000}"
+      ZMK_BUILD_ENV: baseline
+    volumes:
+      - .:/repo:ro
+      - ./.build:/output
+      - zmk-west-baseline:/workspaces/west
+
+  dya:
+    <<: *zmk-common
+    image: docker.io/zmkfirmware/zmk-dev-arm:4.1-branch
+    environment:
+      HOST_UID: "${HOST_UID:-1000}"
+      HOST_GID: "${HOST_GID:-1000}"
+      ZMK_BUILD_ENV: dya
+    volumes:
+      - .:/repo:ro
+      - ./.build:/output
+      - zmk-west-dya:/workspaces/west
+
+volumes:
+  zmk-west-baseline:
+  zmk-west-dya:
