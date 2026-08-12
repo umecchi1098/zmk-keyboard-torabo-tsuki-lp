@@ -69,6 +69,17 @@ Fast Keymapは読み取り専用で、キーマップの書き込み経路やStu
 
 Settings Resetはフェーズ2のバイナリと完全一致した。右Central本番版と開発版のサイズ差はStudio Lockの有無によるもので、本番版でもFlashとRAMには十分な余裕がある。
 
+## CI確認結果
+
+[GitHub Actions run `31600347535`](https://github.com/umecchi1098/zmk-keyboard-torabo-tsuki-lp/actions/runs/31600347535) が成功した。
+
+- クリーン環境からWest workspaceを初期化: 成功
+- 左Peripheral、右Central本番版、右Central開発版、Settings Resetのビルド: 成功
+- `build.yaml` から算出した期待数4件とUF2収集数の一致: 成功
+- `firmware` artifactの作成: 成功
+
+CI成果物4件をダウンロードし、上表のローカル成果物とSHA-256が完全一致することを確認した。以降の実機確認では、このrunの `firmware` artifactを正とする。
+
 ### 生成物の検査
 
 - 本番版: `CONFIG_ZMK_STUDIO_LOCKING=y`
@@ -98,7 +109,7 @@ Settings Resetはフェーズ2のバイナリと完全一致した。右Central�
 
 ## ユーザー実機確認 — 必須ゲート
 
-GitHub Actions成功後、CI成果物の本番用右Centralだけを書き込んで確認する。左Peripheralの実行時機能は変えていないため、今回は左側の再書き込みは不要。
+GitHub Actions成功後、CI成果物の本番用右Centralだけを書き込んで確認する。左右間通信の方式とキー位置番号は変えておらず、左Peripheralは位置情報を右Centralへ送る従来構成のままなので、今回は左側の再書き込みは不要。
 
 ### 書き込み対象
 
