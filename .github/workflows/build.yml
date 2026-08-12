@@ -1,7 +1,65 @@
 name: Build ZMK firmware
-on: [push, pull_request, workflow_dispatch]
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   build:
-    # ローカル検証と同じDYA向けZMKコミットのビルド環境を使用します。
-    uses: cormoran/zmk/.github/workflows/build-user-config.yml@e5c9b6915b56801193e359dd9bad4a167ce0d1b8
+    name: Build
+    runs-on: ubuntu-latest
+    container:
+      # DYA2公式と同じ、Zephyr 4.1対応のビルド用イメージを使用します。
+      image: zmkfirmware/zmk-build-arm:stable
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache west modules
+        uses: actions/cache@v4
+        continue-on-error: true
+        with:
+          path: dependencies/
+          key: ${{ runner.os }}-west-${{ hashFiles('config/west*.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-west-
+
+      - name: Initialize west workspace
+        run: |
+          # コンテナからcheckout済みリポジトリを安全に参照できるようにします。
+          git config --global --add safe.directory "${GITHUB_WORKSPACE}"
+          west init -l config --mf west-standalone.yml
+          west update --narrow
+          west zephyr-export
+
+      - name: Build firmware
+        run: west zmk-build -d ./build -q -P 1
+
+      - name: Collect firmware
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          while IFS= read -r firmware_file; do
+            artifact_name="$(basename "$(dirname "$(dirname "${firmware_file}")")")"
+            cp "${firmware_file}" "artifacts/${artifact_name}.uf2"
+          done < <(find ./build -type f -path '*/zephyr/zmk.uf2' -print | sort)
+
+          # 有効なビルド対象は左、右、Settings Resetの3件です。
+          artifact_count="$(find artifacts -maxdepth 1 -type f -name '*.uf2' | wc -l)"
+          if [[ "${artifact_count}" -ne 3 ]]; then
+            echo "ERROR: UF2成果物は3件必要ですが、${artifact_count}件でした。" >&2
+            exit 1
+          fi
+
+      - name: Archive firmware
+        uses: actions/upload-artifact@v4
+        with:
+          # 利用者が従来と同じ名前で成果物を取得できるようにします。
+          name: firmware
+          path: artifacts/*.uf2
+          if-no-files-found: error

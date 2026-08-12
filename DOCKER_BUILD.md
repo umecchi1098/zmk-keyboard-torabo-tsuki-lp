@@ -35,12 +35,14 @@ cd zmk-keyboard-torabo-tsuki-lp
 ./scripts/zmk-build.sh
 ```
 
-`config/west.yml` の内容から、通常は次の環境が自動選択される。
+`config/west-dependency.yml` の内容から、通常は次の環境が自動選択される。
 
 - 現行ZMK v0.3: `zmkfirmware/zmk-dev-arm:3.5`
 - DYA／Zephyr 4.1: `zmkfirmware/zmk-dev-arm:4.1-branch`
 
-現行 `config/west.yml` では `baseline` が選択される。`dya` はDYA用マニフェストへ移行するフェーズで実ビルドを確認する。
+現行構成では `dya` が選択される。依存関係は `config/west-standalone.yml` から初期化され、`dependencies/` 配下へまとめられる。
+
+`baseline` は移行前ファームウェアとの比較専用として残している。通常の開発・配布では `dya` を使用する。
 
 環境を明示する場合:
 
@@ -52,7 +54,7 @@ cd zmk-keyboard-torabo-tsuki-lp
 単一成果物だけをビルドする場合:
 
 ```bash
-./scripts/zmk-build.sh baseline torabo_tsuki_lp_right_central
+./scripts/zmk-build.sh dya torabo_tsuki_lp_right_central
 ```
 
 成果物と検証資料は次に出力される。
@@ -74,10 +76,12 @@ cd zmk-keyboard-torabo-tsuki-lp
 
 ```text
 zmk-west-baseline  # ZMK v0.3 / Zephyr 3.5
-zmk-west-dya       # DYA / Zephyr 4.1
+zmk-west-dya-v2    # DYA / Zephyr 4.1（DYA2形式のManifest）
 ```
 
-`config/` は実行ごとにコンテナ内ワークスペースへ同期され、`west update` が実行される。リポジトリ本体はコンテナへ読み取り専用でマウントされる。
+`config/` は実行ごとにコンテナ内ワークスペースへ同期され、`west update --narrow` が実行される。リポジトリ本体はコンテナへ読み取り専用でマウントされる。
+
+ビルドはDYA2参照実装と同じ `west zmk-build` を使用する。依存関係のSHAは `config/west-dependency.yml` に固定している。
 
 ## CI/CDとの役割分担
 
@@ -92,4 +96,4 @@ zmk-west-dya       # DYA / Zephyr 4.1
 
 DockerをWSLから利用できない場合は、Docker DesktopのWSL IntegrationまたはWSL内Docker Engineを確認する。WindowsネイティブへZMKツールチェーンを追加して回避する必要はない。
 
-利用可能な成果物名は `build.yaml` の `artifact-name` で確認する。`artifact-name` がない項目は、GitHub Actionsと同じ規則で名前が生成される。
+利用可能な成果物名は `build.yaml` の `artifact` で確認する。各項目には、対象を誤認しない明示的な名前を必ず設定する。

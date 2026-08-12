@@ -10,14 +10,14 @@ usage() {
     cat <<'EOF'
 Usage: ./scripts/zmk-build.sh [auto|baseline|dya] [artifact-name ...]
 
-  auto      config/west.yml から使用環境を判定（既定）
+  auto      config/west-dependency.yml から使用環境を判定（既定）
   baseline  ZMK v0.3 / Zephyr 3.5 用コンテナ
   dya       DYA / Zephyr 4.1 用コンテナ
 
 成果物名を指定すると、その成果物だけをビルドします。
 例:
   ./scripts/zmk-build.sh
-  ./scripts/zmk-build.sh baseline torabo_tsuki_lp_right_central
+  ./scripts/zmk-build.sh dya torabo_tsuki_lp_right_central
 EOF
 }
 
@@ -36,7 +36,7 @@ if (( $# > 0 )); then
 fi
 
 if [[ "$environment" == "auto" ]]; then
-    if grep -Eq 'cormoran|main\+dya|v4\.1\.0\+zmk-fixes' "${repo_dir}/config/west.yml"; then
+    if grep -Eq 'cormoran|main\+dya|v4\.1\.0\+zmk-fixes' "${repo_dir}/config/west-dependency.yml"; then
         environment="dya"
     else
         environment="baseline"

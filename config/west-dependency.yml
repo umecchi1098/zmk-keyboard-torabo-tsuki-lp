@@ -1,0 +1,66 @@
+manifest:
+  version: 1.2
+  remotes:
+    - name: zmkfirmware
+      url-base: https://github.com/zmkfirmware
+    - name: cormoran
+      url-base: https://github.com/cormoran
+    - name: sekigon-gonnoc
+      url-base: https://github.com/sekigon-gonnoc
+  projects:
+    # DYA2公式と同じwest zmk-buildを使います。再現性のためSHAを固定します。
+    - name: zmk-west-commands
+      remote: cormoran
+      revision: 536260056f362edb2092905f2a75317bc8cb9bc2
+      import: true
+    - name: zmk
+      remote: cormoran
+      revision: e5c9b6915b56801193e359dd9bad4a167ce0d1b8
+      clone-depth: 1
+      import:
+        file: app/west.yml
+    # DYA2公式参照実装が使用する、nRF半二重UART対応のZephyrを固定します。
+    - name: zephyr
+      remote: cormoran
+      revision: 7c6b4cc486ecb41a68d9c2b1def2bb3178fbb826
+      clone-depth: 1
+      import:
+        name-blocklist:
+          - ci-tools
+          - hal_altera
+          - hal_cypress
+          - hal_infineon
+          - hal_microchip
+          - hal_nxp
+          - hal_openisa
+          - hal_xtensa
+          - hal_st
+          - hal_ti
+          - loramac-node
+          - mcuboot
+          - mcumgr
+          - net-tools
+          - openthread
+          - edtt
+          - trusted-firmware-m
+    - name: zmk-component-bmp-boost
+      remote: sekigon-gonnoc
+      revision: 2f5567523b6f0bc39575d48ed746ed9d635edf8b
+      import: west.yml
+    - name: zmk-feature-status-led
+      remote: sekigon-gonnoc
+      revision: 572d0e16ecdd6b6d57e96461643cc55e7b9164d3
+    - name: zmk-driver-paw3222
+      remote: sekigon-gonnoc
+      revision: 0e1835c57f88d215ce401b6d0901f361629621fc
+    - name: zmk-driver-iqs7211e
+      remote: sekigon-gonnoc
+      revision: 436d3c42172abf812ec104521f29384fc02fc50e
+    - name: zmk-feature-cdc-acm-bootloader-trigger
+      remote: sekigon-gonnoc
+      revision: 3fc210f840433bb9204a510f3a2c78b4fa11482f
+    - name: zmk-feature-non-lipo-battery-management
+      remote: sekigon-gonnoc
+      revision: bf024bb7872917f718a960d804136db5f9b88a31
+  self:
+    path: config

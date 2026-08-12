@@ -1,0 +1,4 @@
+# 既存のWest workspaceへ、このリポジトリを組み込む場合に使うManifestです。
+manifest:
+  self:
+    import: config/west-dependency.yml

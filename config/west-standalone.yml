@@ -1,0 +1,8 @@
+# このリポジトリ単体で使うManifestです。
+# 依存リポジトリをworkspace直下のdependencies/へまとめます。
+manifest:
+  self:
+    path: config
+    import:
+      file: west-dependency.yml
+      path-prefix: dependencies

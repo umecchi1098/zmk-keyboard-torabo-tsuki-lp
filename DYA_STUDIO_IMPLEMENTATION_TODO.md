@@ -180,31 +180,31 @@ Codexの全ビルド成功後に、互換性確認を1回だけ依頼する。
 
 ## フェーズ2: Manifest・CI・ビルドマトリクスの再構成
 
-状態: 未着手
+状態: 自動検証中（ローカル完了、GitHub Actions確認待ち）
 
 ### Codex
 
-- [ ] DYA2参照実装のManifest構成を再確認する
-- [ ] 共通依存を `west-dependency.yml` へ分離する
-- [ ] standalone用Manifestを追加する
-- [ ] workspace用Manifestを追加する
-- [ ] GitHub Actionsを `west zmk-build` ベースへ移行する
-- [ ] 依存キャッシュを設定する
-- [ ] 本番用と開発用の成果物名を区別する
-- [ ] 現時点で有効な構成だけを必須ビルドにする
-- [ ] 将来構成はコメントではなく、明示的な任意matrixまたは別build定義として管理する
+- [x] DYA2参照実装のManifest構成を再確認する
+- [x] 共通依存を `west-dependency.yml` へ分離する
+- [x] standalone用Manifestを追加する
+- [x] workspace用Manifestを追加する
+- [x] GitHub Actionsを `west zmk-build` ベースへ移行する
+- [x] 依存キャッシュを設定する
+- [x] 本番用と開発用の成果物名を区別する命名規則を定める
+- [x] 現時点で有効な構成だけを必須ビルドにする
+- [x] 将来構成はコメントではなく、実装時に別build定義として追加する方針へ変更する
 
 ### 自動検証
 
-- [ ] ローカルのstandalone構成でwest初期化できる
-- [ ] 左Peripheral、右Central、Settings Resetを一括ビルドできる
-- [ ] CI用YAMLの構文が正しい
+- [x] ローカルのstandalone構成でwest初期化できる
+- [x] 左Peripheral、右Central、Settings Resetを一括ビルドできる
+- [x] CI用YAMLの構文が正しい
 - [ ] GitHub Actionsが成功する
-- [ ] 成果物に対象を識別できる名前が付く
+- [x] 成果物に対象を識別できる名前が付く
 
 ### ユーザー実機確認
 
-不要。フェーズ1と同じバイナリ設定になることを自動比較する。
+不要。フェーズ1と機能Kconfig、DeviceTree、text、BSSが一致することを自動比較済み。追加差分は実行時コードを持たない `zmk-west-commands` の自動登録と、それに伴う配置情報のみ。
 
 ### コミット
 

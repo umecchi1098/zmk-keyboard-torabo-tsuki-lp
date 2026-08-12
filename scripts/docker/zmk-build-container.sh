@@ -4,6 +4,7 @@ set -euo pipefail
 readonly repo_dir=/repo
 readonly workspace_dir=/workspaces/west
 readonly config_dir="${workspace_dir}/config"
+readonly build_root="${workspace_dir}/build"
 readonly build_env="${ZMK_BUILD_ENV:?ZMK_BUILD_ENV is required}"
 readonly output_root="/output/local/${build_env}"
 readonly artifact_filter="${ARTIFACT_FILTER:-}"
@@ -22,20 +23,24 @@ fix_output_owner() {
 
 trap fix_output_owner EXIT
 
-mkdir -p "$workspace_dir" "$output_root"
+mkdir -p "$workspace_dir" "$build_root" "$output_root"
 rm -rf -- "$config_dir"
 cp -a "${repo_dir}/config" "$config_dir"
 
 cd "$workspace_dir"
 
 if [[ ! -d .west ]]; then
-    west init -l config
+    west init -l config --mf west-standalone.yml
+else
+    # 既存Volumeを使う場合も、新しいstandalone Manifestを明示します。
+    west config manifest.path config
+    west config manifest.file west-standalone.yml
 fi
 
-west update --fetch-opt=--filter=tree:0
+west update --narrow
 west zephyr-export
 
-python3 - "${repo_dir}/build.yaml" <<'PY' > /tmp/zmk-build-matrix.txt
+python3 - "${repo_dir}/build.yaml" <<'PY' > /tmp/zmk-build-artifacts.txt
 import sys
 from pathlib import Path
 
@@ -43,47 +48,41 @@ import yaml
 
 matrix = yaml.safe_load(Path(sys.argv[1]).read_text(encoding="utf-8")) or {}
 for item in matrix.get("include", []):
-    board = str(item["board"])
-    shield = str(item.get("shield", ""))
-    snippet = str(item.get("snippet", ""))
-    artifact = str(item.get("artifact-name") or f"{shield + '-' if shield else ''}{board.replace('/', '_')}-zmk")
-    cmake_args = str(item.get("cmake-args", ""))
-    fields = (board, shield, snippet, artifact, cmake_args)
-    if any("\x1f" in field or "\n" in field for field in fields):
-        raise SystemExit(f"build.yaml contains an unsupported separator or newline: {artifact}")
-    print("\x1f".join(fields))
+    artifact = str(item.get("artifact", ""))
+    if not artifact:
+        raise SystemExit("build.yamlの各項目にはartifactが必要です。")
+    if not artifact.replace("-", "").replace("_", "").isalnum():
+        raise SystemExit(f"artifactに使用できない文字が含まれています: {artifact}")
+    print(artifact)
 PY
 
-selected_count=0
-while IFS=$'\x1f' read -r board shield snippet artifact_name cmake_args; do
+selected_artifacts=()
+while IFS= read -r artifact_name; do
     if ! is_selected "$artifact_name"; then
         continue
     fi
+    selected_artifacts+=("$artifact_name")
+done < /tmp/zmk-build-artifacts.txt
 
-    selected_count=$((selected_count + 1))
-    build_dir="${workspace_dir}/build/${artifact_name}"
+if (( ${#selected_artifacts[@]} == 0 )); then
+    echo "ERROR: 指定された成果物がbuild.yamlにありません: ${artifact_filter}" >&2
+    exit 1
+fi
+
+# DYA2公式と同じwest拡張コマンドで、build.yamlの有効項目をビルドします。
+west_command=(west zmk-build "$repo_dir" -d "$build_root" -P 1)
+if [[ -n "$artifact_filter" ]]; then
+    selected_regex="$(IFS='|'; printf '%s' "${selected_artifacts[*]}")"
+    west_command+=(-af "^(${selected_regex})$")
+fi
+"${west_command[@]}"
+
+for artifact_name in "${selected_artifacts[@]}"; do
+    build_dir="${build_root}/${artifact_name}"
     artifact_dir="${output_root}/${artifact_name}"
-    log_file="${artifact_dir}/build.log"
 
     rm -rf -- "$artifact_dir"
     mkdir -p "$artifact_dir"
-
-    west_args=(build -s zmk/app -d "$build_dir" -b "$board" --pristine)
-    if [[ -n "$snippet" ]]; then
-        west_args+=(-S "$snippet")
-    fi
-
-    cmake_options=("-DZMK_CONFIG=${config_dir}" "-DZMK_EXTRA_MODULES=${repo_dir}")
-    if [[ -n "$shield" ]]; then
-        cmake_options+=("-DSHIELD=${shield}")
-    fi
-    if [[ -n "$cmake_args" ]]; then
-        read -r -a extra_cmake_options <<< "$cmake_args"
-        cmake_options+=("${extra_cmake_options[@]}")
-    fi
-
-    echo "==> Building ${artifact_name} (${board}${shield:+ / ${shield}})"
-    west "${west_args[@]}" -- "${cmake_options[@]}" 2>&1 | tee "$log_file"
 
     if [[ -f "${build_dir}/zephyr/zmk.uf2" ]]; then
         cp "${build_dir}/zephyr/zmk.uf2" "${artifact_dir}/${artifact_name}.uf2"
@@ -94,6 +93,7 @@ while IFS=$'\x1f' read -r board shield snippet artifact_name cmake_args; do
         exit 1
     fi
 
+    [[ -f "${build_dir}/stdout_and_stderr.log" ]] && cp "${build_dir}/stdout_and_stderr.log" "${artifact_dir}/build.log"
     [[ -f "${build_dir}/zephyr/.config" ]] && cp "${build_dir}/zephyr/.config" "${artifact_dir}/kconfig"
     [[ -f "${build_dir}/zephyr/zephyr.dts" ]] && cp "${build_dir}/zephyr/zephyr.dts" "${artifact_dir}/zephyr.dts"
     elf_file=""
@@ -114,11 +114,6 @@ while IFS=$'\x1f' read -r board shield snippet artifact_name cmake_args; do
             echo "WARNING: size toolが見つからないため、firmware-size.txtを生成できません。" >&2
         fi
     fi
-done < /tmp/zmk-build-matrix.txt
-
-if (( selected_count == 0 )); then
-    echo "ERROR: 指定された成果物がbuild.yamlにありません: ${artifact_filter}" >&2
-    exit 1
-fi
+done
 
 echo "Build completed: ${output_root}"

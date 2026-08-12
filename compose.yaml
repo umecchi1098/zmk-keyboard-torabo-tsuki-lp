@@ -30,8 +30,9 @@ services:
     volumes:
       - .:/repo:ro
       - ./.build:/output
-      - zmk-west-dya:/workspaces/west
+      # Manifest再構成前のworkspaceと混在しない、新しいVolumeを使用します。
+      - zmk-west-dya-v2:/workspaces/west
 
 volumes:
   zmk-west-baseline:
-  zmk-west-dya:
+  zmk-west-dya-v2:
