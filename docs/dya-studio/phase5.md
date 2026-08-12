@@ -82,8 +82,8 @@ MacroとComboはCustom Settingsを通じてNVSへ保存される。Settings Rese
 | 成果物 | text | data | BSS | Flash | RAM | UF2 | SHA-256 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
 | 左Peripheral | 196,652 B | 23,600 B | 70,887 B | 30.21% | 28.58% | 440,832 B | `dba63e549db46ab9f45e7d9a41674a4d0056a817e63ffd4fc0a2e3de065b03b6` |
-| 右Central本番版 | 283,352 B | 58,623 B | 133,792 B | 46.91% | 54.33% | 684,032 B | `58aabc3b049df865b3fd49610d66a46c1956f5d272a0822ed389a9f88ffa3828` |
-| 右Central開発版 | 283,260 B | 58,576 B | 133,791 B | 46.89% | 54.31% | 684,032 B | `cc6a6ff0bd4edb82ab5c5dd3fe8ba863ba2f6268f6ed260e7df90dd4dc1aae51` |
+| 右Central本番版 | 283,352 B | 58,623 B | 133,792 B | 46.91% | 54.33% | 684,032 B | `732899eab7885255f4fc87e358f773e47b312955c6320aec5a531872dc6a3c99` |
+| 右Central開発版 | 283,260 B | 58,576 B | 133,791 B | 46.89% | 54.31% | 684,032 B | `ad5a3ea5b4a5d8b7b6717b4993c808896a775ddfd440550ff09c6abd23284803` |
 | Settings Reset | 50,808 B | 3,837 B | 12,179 B | 7.50% | 5.02% | 109,568 B | `1481398b551dd7b1032c9d86b2966ba579b77cac3b1302fad95203727221cfeb` |
 
 ### フェーズ4とのサイズ比較
@@ -146,4 +146,11 @@ local IDをCRC16へ移行するため、今回は次の順番を守る。
 
 ## CI確認結果
 
-実装コミットのpush後にGitHub Actionsを確認し、run番号、4成果物の成否、ローカル成果物とのSHA-256比較を追記する。
+[GitHub Actions run `31609107142`](https://github.com/umecchi1098/zmk-keyboard-torabo-tsuki-lp/actions/runs/31609107142) が成功した。
+
+- クリーン環境からWest workspaceを初期化: 成功
+- 左Peripheral、右Central本番版、右Central開発版、Settings Resetのビルド: 成功
+- `build.yaml`から算出した期待数4件とUF2収集数の一致: 成功
+- `firmware` artifactの作成: 成功
+
+CI成果物4件をダウンロードし、上表のローカル成果物とSHA-256およびバイナリ内容が完全一致することを確認した。
