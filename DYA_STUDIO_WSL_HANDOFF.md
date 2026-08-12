@@ -3,7 +3,8 @@
 最終更新: 2026-08-12
 対象ブランチ: `feature/dya-studio-full-support`
 起点: `dev/custom-dya` (`0b44ea6`)
-進行中フェーズ: フェーズ0「ベースラインの固定」
+完了フェーズ: フェーズ0「ベースラインの固定」
+次フェーズ: フェーズ1「DYA用ZMK／Zephyrへの基盤更新」
 
 ## 環境ルール
 
@@ -18,7 +19,7 @@ ZMK／Zephyrのローカルビルドは、WSL2からDockerを使用する。Wind
 - 実装用ブランチ `feature/dya-studio-full-support` は作成済み
 - 起点コミットは `0b44ea6`
 - DYA Studio対応のソースコード変更はまだ行っていない
-- フェーズ0は作業中
+- フェーズ0はローカルDockerとGitHub Actionsの検証を含めて完了
 - 現行用とDYA用を分離した `compose.yaml` とローカルビルドスクリプトを追加済み
 - 現行用Dockerイメージ: `zmkfirmware/zmk-dev-arm:3.5`
 - DYA用Dockerイメージ: `zmkfirmware/zmk-dev-arm:4.1-branch`
@@ -28,7 +29,7 @@ ZMK／Zephyrのローカルビルドは、WSL2からDockerを使用する。Wind
 - 現行3成果物のローカルDockerビルドは成功済み
 - 基準値は `docs/dya-studio/baseline.md` に記録済み
 - DYA用コンテナは公式派生ブランチと同じイメージを設定済みだが、DYA用マニフェストへの移行前なので実ビルドは未確認
-- GitHub Actionsのクリーンビルドは未確認
+- GitHub Actions run `31557896375` で3成果物と統合ジョブが成功
 
 ## 再開時の確認
 
@@ -78,7 +79,9 @@ DYA用ZMKへ移行するときは、`config/west.yml` と同時にGitHub Actions
 
 ## 次に行う作業
 
-1. Docker構成とフェーズ0途中経過を日本語コミットで保存する
-2. Pull Request CIを実行し、クリーンビルド結果を確認する
-3. CIの成果物とローカル基準値を比較する
-4. フェーズ0の全項目が完了した時点でToDoを更新する
+1. フェーズ1開始時点のDYA Studio、ZMK、Zephyr公式情報を再確認する
+2. DYA用ZMK／Zephyrと外部モジュールの採用候補SHAを記録する
+3. `config/west.yml` をDYA用候補revisionへ更新する
+4. DYA機能を有効化する前に、既存機能だけでローカルDockerビルドする
+5. 外部モジュールのZephyr 4.1互換性を確認し、必要な前方移植を行う
+6. Pull Request CI成功後に、フェーズ1の実機確認を依頼する

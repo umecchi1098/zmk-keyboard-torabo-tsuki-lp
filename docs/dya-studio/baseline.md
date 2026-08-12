@@ -56,7 +56,17 @@
 | 右Central | 527,360 B | 263,520 B | 72,602 B | `8c91c9c5e4654eaa2d7de5c5f269f40d6ac834cc0d437668ebdffbe3895a19d9` |
 | Settings Reset | 96,256 B | 47,964 B | 11,856 B | `c88e58ae51bfa83196bddf4f06b60d058adc1d8035d53d0316eabaece54c8e5f` |
 
-各成果物について、ビルドログ、Kconfig、生成Devicetreeも保存済み。CIのクリーンビルドは未実施であり、最終的なベースライン合格はCI成功後とする。
+各成果物について、ビルドログ、Kconfig、生成Devicetreeも保存済み。
+
+GitHub Actions run [31557896375](https://github.com/umecchi1098/zmk-keyboard-torabo-tsuki-lp/actions/runs/31557896375) で、3成果物と統合ジョブがすべて成功した。CI成果物は `.build/ci/31557896375/` へ取得して確認済み。
+
+| CI成果物 | UF2 | SHA-256 |
+|---|---:|---|
+| 左Peripheral | 359,936 B | `534c757e0b707844fd68ef6cd529aae128b643593b59cc30b99c3d91160b37f5` |
+| 右Central | 527,360 B | `1ba5200af406bec0645f416c4deede10a63cda148957b485cf122d2289116251` |
+| Settings Reset | 96,256 B | `d24a45e6c41e11388c371528244085f54a3beb25019151c59fe2bdcc49fdf6f1` |
+
+UF2サイズはローカルDocker成果物と全件一致した。SHA-256はローカル成果物と一致しないため、以後の回帰比較ではビルド環境を区別し、CI同士または同一Docker環境同士で比較する。
 
 ## 構成ファイル
 
