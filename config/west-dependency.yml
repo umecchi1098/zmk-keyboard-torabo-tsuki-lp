@@ -102,5 +102,9 @@ manifest:
     - name: zmk-feature-input-stream
       remote: cormoran
       revision: aeb015908a42a7615ccdccc7feb3a10d23132a71
+    # DYA StudioからIdleとDeep Sleepの時間を確認・変更し、左右へ同期します。
+    - name: zmk-module-settings-rpc
+      remote: cormoran
+      revision: 78f86df9e6c5edaf57bef3ccbd7f360cfdf49291
   self:
     path: config

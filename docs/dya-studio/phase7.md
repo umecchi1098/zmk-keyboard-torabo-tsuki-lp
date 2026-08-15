@@ -123,4 +123,4 @@ GitHub Actions run [`31862088003`](https://github.com/umecchi1098/zmk-keyboard-t
 
 ## 次の作業
 
-上記の実機確認が完了した後、同じフェーズの残項目である`zmk-module-settings-rpc`を別コミットで追加する。接続管理の問題と本体設定の問題を切り分けるため、今回は同時に有効化しない。
+接続管理とDefault Layerの実機確認は完了した。残項目だった`zmk-module-settings-rpc`は、問題を切り分けられるよう別コミットで追加した。現在の構成と確認手順は[Settings RPC運用メモ](settings-rpc.md)を参照する。

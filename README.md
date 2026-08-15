@@ -14,6 +14,8 @@ Runtime Input Processor画面では、トラックボールの感度、回転、
 
 「接続」画面では、BLEプロファイル、USB／BLE優先順位、OS検出、接続先ごとの既定レイヤーを管理できます。接続先にはLayer 0のBaseまたはLayer 1のmacOSを指定でき、初期値の`未設定`では従来どおりLayer 0を使用します。レイヤー番号の移行手順とInput Streamの制約は[Default Layer運用メモ](docs/dya-studio/default-layer-layout.md)を参照してください。
 
+「設定」画面では、左右それぞれのIdleとDeep Sleepの時間を確認・変更できます。初期値はIdle 30秒、Deep Sleep 150分です。変更値は10秒後に自動保存されるため、変更直後に電源を切らないでください。詳しい注意点と確認手順は[Settings RPC運用メモ](docs/dya-studio/settings-rpc.md)を参照してください。
+
 `torabo_tsuki_lp_right_central_develop.uf2` はStudio Lockを無効にした開発・切り分け専用版です。通常運用には使用しないでください。
 
 左右両方にポインターを搭載する場合だけ、`torabo_tsuki_lp_double_ball_left_peripheral.uf2`と`torabo_tsuki_lp_double_ball_right_central.uf2`を組にして使用してください。標準版との混在は避けてください。
@@ -22,6 +24,6 @@ Runtime Input Processor画面では、トラックボールの感度、回転、
 
 Zephyr 4.1環境では、旧customファーム由来の段階的な左右間BLE省電力処理を既定で無効にしています。無操作後に左Peripheralが操作不能になる問題が実機で発生したためで、修正版では接続が維持されることを確認済みです。
 
-ZMK標準のIdle（30秒）とDeep Sleep（150分）は引き続き有効です。安定性を優先し、独自BLE省電力処理は再有効化せずに運用します。原因、影響、再検討条件の詳細は[フェーズ1の検証記録](docs/dya-studio/phase1.md#実機回帰と修正方針)を参照してください。
+ZMK標準のIdle（30秒）とDeep Sleep（150分）は引き続き有効です。DYA Studioから時間を変更できますが、独自BLE省電力処理は再有効化されません。安定性を優先し、独自処理を無効のまま運用します。原因、影響、再検討条件の詳細は[フェーズ1の検証記録](docs/dya-studio/phase1.md#実機回帰と修正方針)を参照してください。
 
 ローカルビルドはWSL2上のDockerを使用します。セットアップと実行方法は [DOCKER_BUILD.md](DOCKER_BUILD.md) を参照してください。
