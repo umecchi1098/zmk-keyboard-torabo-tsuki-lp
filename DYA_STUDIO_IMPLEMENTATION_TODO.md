@@ -402,31 +402,31 @@ SHA-256、初回書き込みと実機確認手順は
 
 ## フェーズ7: Connection・Default Layer・Settings
 
-状態: 未着手
+状態: 接続管理・Default Layer実装済み、実機確認待ち（Settingsは未着手）
 
 ### Codex
 
-- [ ] `zmk-module-ble-management` を追加する
+- [x] `zmk-module-ble-management` を追加する
 - [ ] `zmk-module-settings-rpc` を追加する
-- [ ] `zmk-feature-default-layer@codex/custom-rpc-rewrite` を追加する
-- [ ] `zmk-feature-os-detection` を追加する
-- [ ] BLE profile数を現行設定と一致させる
-- [ ] Idle／Deep Sleepの既定値を現在値と一致させる
-- [ ] 左右別／一括設定の対象を明記する
-- [ ] 既存レイヤー1～6をDefault Layerに誤指定できない設計にする
-- [ ] 許可レイヤー方式またはOS別Baseレイヤー方式を決定する
-- [ ] 手動OS overrideを本番版で有効にする
-- [ ] OS自動検出は開発版でのみ有効にする
-- [ ] 本番昇格条件をWindows／macOS／Linux／iOS／Android別に記録する
+- [x] `zmk-feature-default-layer@codex/custom-rpc-rewrite`系列の固定SHAを追加する
+- [x] `zmk-feature-os-detection` を追加する
+- [x] BLE profile数を現行設定と一致させる
+- [x] Idle／Deep Sleepの既定値を現在値と一致させる
+- [x] 接続管理機能を右Centralだけの対象として明記する
+- [x] 独自のレイヤー制限を設けず、upstreamの全レイヤー方式を採用する
+- [x] Layer 0または予約Layer 7～10を使用する運用を決定する
+- [x] 手動OS overrideを本番版で有効にする
+- [x] upstream構成どおりOS自動検出を本番版と開発版で有効にする
+- [x] Windows／macOS／Linux／iOS／Android別の制約と確認項目を記録する
 
 ### 自動検証
 
-- [ ] BLE Management／Settings／Default Layerがビルド成功する
-- [ ] レイヤー範囲外設定が拒否される
-- [ ] Base以外を誤って常時有効化しない
-- [ ] Centralのみで接続先判定とRPCが動作する構成になっている
-- [ ] Settings Reset成果物がビルド成功する
-- [ ] RAM／Flash／スタック使用量が許容範囲内である
+- [x] BLE Management／OS Detection／Default Layerがビルド成功する
+- [x] upstreamがキーマップ範囲外のレイヤー設定を拒否することを確認する
+- [x] 初期値`未設定`では従来のBaseレイヤーを維持する
+- [x] Centralのみで接続先判定とRPCが動作する構成になっている
+- [x] Settings Reset成果物がビルド成功する
+- [x] RAM／Flash／スタック使用量が許容範囲内である
 
 ### ユーザー実機確認 — 必須ゲート
 

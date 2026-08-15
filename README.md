@@ -12,6 +12,8 @@
 
 Runtime Input Processor画面では、トラックボールの感度、回転、軸反転、自動Mouse、Scroll設定を変更・保存できます。通常版には`mouse`と`scroll`が表示されます。詳しい既定値と確認手順は[フェーズ6の検証記録](docs/dya-studio/phase6.md)を参照してください。
 
+「接続」画面では、BLEプロファイル、USB／BLE優先順位、OS検出、接続先ごとの既定レイヤーを管理できます。接続先レイヤーの初期値は`未設定`で、設定するまでは従来どおりLayer 0を使用します。安全な確認順序とOS検出の制約は[フェーズ7の実装記録](docs/dya-studio/phase7.md)を参照してください。
+
 `torabo_tsuki_lp_right_central_develop.uf2` はStudio Lockを無効にした開発・切り分け専用版です。通常運用には使用しないでください。
 
 左右両方にポインターを搭載する場合だけ、`torabo_tsuki_lp_double_ball_left_peripheral.uf2`と`torabo_tsuki_lp_double_ball_right_central.uf2`を組にして使用してください。標準版との混在は避けてください。
