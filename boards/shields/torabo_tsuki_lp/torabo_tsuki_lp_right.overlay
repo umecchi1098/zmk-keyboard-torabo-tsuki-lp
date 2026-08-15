@@ -1,15 +1,15 @@
 #include "torabo_tsuki_lp.dtsi"
 
 &pointing_listener {
-    /* Scrollを先に処理すると、Layer 5ではMouse側が変換済みイベントを無視します。 */
+    /* Scrollを先に処理すると、Layer 6ではMouse側が変換済みイベントを無視します。 */
     input-processors = <&scroll_runtime_input_processor
                         &mouse_runtime_input_processor>;
 };
 
 &mouse_runtime_input_processor {
-    /* 右側は従来どおり、150msの待機後に500msのMouseレイヤーを使用します。 */
+    /* 右側は従来どおり、150msの待機後に500msのMouseレイヤー2を使用します。 */
     temp-layer-enabled;
-    temp-layer = <1>;
+    temp-layer = <2>;
     temp-layer-activation-delay-ms = <150>;
     temp-layer-deactivation-delay-ms = <500>;
     x-invert;
@@ -21,7 +21,7 @@
     y-codes = <INPUT_REL_Y>;
     scale-multiplier = <1>;
     scale-divisor = <64>;
-    active-layers = <BIT(5)>;
+    active-layers = <BIT(6)>;
     xy-to-scroll-enabled;
     x-invert;
 };

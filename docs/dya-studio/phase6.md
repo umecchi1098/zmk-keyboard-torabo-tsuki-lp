@@ -3,6 +3,9 @@
 確認日: 2026-08-15
 対象ブランチ: `feature/dya-studio-full-support`
 
+> [!IMPORTANT]
+> この文書のLayer 1（Mouse）とLayer 5（Scroll）はフェーズ6完了時点の番号です。接続先別macOSレイヤーの追加後はMouseがLayer 2、ScrollがLayer 6へ移動しています。現在の番号と移行手順は[接続先別Default Layerの運用メモ](default-layer-layout.md)を参照してください。
+
 ## 目的
 
 従来の固定ポインター処理をRuntime Input Processorへ移行し、DYA Studioから感度、回転、反転、自動Mouseレイヤー、Scroll設定を変更・保存できるようにする。

@@ -2,7 +2,10 @@
 
 確認日: 2026-08-15
 対象ブランチ: `feature/dya-studio-full-support`
-状態: 自動検証完了、実機確認待ち
+状態: 自動検証・実機確認完了（初回構成）
+
+> [!IMPORTANT]
+> この文書のLayer 0～10をDefault Layerへ指定する構成は、初回実装時の記録です。その後の実機確認でレイヤー優先順位とInput Stream表示の問題が見つかったため、現在はLayer 0のBaseとLayer 1のmacOSだけを選択できる構成へ変更しています。現在の番号と移行手順は[接続先別Default Layerの運用メモ](default-layer-layout.md)を参照してください。
 
 ## 目的
 

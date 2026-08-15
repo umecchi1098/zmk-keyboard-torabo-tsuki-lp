@@ -110,9 +110,9 @@
         rotation-degrees = <0>;
         track-remainders;
 
-        /* 従来どおり、左側は150msの待機後にMouseレイヤー1を有効化します。 */
+        /* 左側は150msの待機後にMouseレイヤー2を有効化します。 */
         temp-layer-enabled;
-        temp-layer = <1>;
+        temp-layer = <2>;
         temp-layer-activation-delay-ms = <150>;
         temp-layer-deactivation-delay-ms = <800>;
         temp-layer-transparent-behavior = <&trans>;
@@ -136,8 +136,8 @@
         rotation-degrees = <0>;
         track-remainders;
 
-        /* Layer 5だけでXY移動をスクロールへ変換し、従来どおりXだけ反転します。 */
-        active-layers = <BIT(5)>;
+        /* Scrollレイヤー6だけでXY移動をスクロールへ変換し、従来どおりXだけ反転します。 */
+        active-layers = <BIT(6)>;
         xy-to-scroll-enabled;
         x-invert;
         #input-processor-cells = <0>;

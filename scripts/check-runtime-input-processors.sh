@@ -107,6 +107,8 @@ readonly double_processor_count="$(rg --count 'compatible = "zmk,input-processor
 
 assert_node_contains "$right_dts" 'mouse_runtime_input_processor:' 'processor-label = "mouse";' \
     "右Mouseの識別子が一致しません"
+assert_node_contains "$right_dts" 'mouse_runtime_input_processor:' 'temp-layer = < 0x2 >;' \
+    "右Mouseの対象がLayer 2ではありません"
 assert_node_contains "$right_dts" 'mouse_runtime_input_processor:' 'temp-layer-activation-delay-ms = < 0x96 >;' \
     "右Mouseの有効化待ち時間が150msではありません"
 assert_node_contains "$right_dts" 'mouse_runtime_input_processor:' 'temp-layer-deactivation-delay-ms = < 0x1f4 >;' \
@@ -120,8 +122,8 @@ assert_node_contains "$right_dts" 'scroll_runtime_input_processor:' 'processor-l
     "右Scrollの識別子が一致しません"
 assert_node_contains "$right_dts" 'scroll_runtime_input_processor:' 'scale-divisor = < 0x40 >;' \
     "右Scrollの倍率が1/64ではありません"
-assert_node_contains "$right_dts" 'scroll_runtime_input_processor:' 'active-layers = < 0x20 >;' \
-    "右Scrollの対象がLayer 5ではありません"
+assert_node_contains "$right_dts" 'scroll_runtime_input_processor:' 'active-layers = < 0x40 >;' \
+    "右Scrollの対象がLayer 6ではありません"
 assert_node_contains "$right_dts" 'scroll_runtime_input_processor:' 'xy-to-scroll-enabled;' \
     "右ScrollのXY変換がありません"
 assert_node_contains "$right_dts" 'scroll_runtime_input_processor:' 'x-invert;' \
@@ -131,6 +133,8 @@ assert_node_not_contains "$right_dts" 'scroll_runtime_input_processor:' 'y-inver
 
 assert_node_contains "$double_right_dts" 'split_mouse_runtime_input_processor:' 'processor-label = "lmouse";' \
     "左Mouseの識別子が一致しません"
+assert_node_contains "$double_right_dts" 'split_mouse_runtime_input_processor:' 'temp-layer = < 0x2 >;' \
+    "左Mouseの対象がLayer 2ではありません"
 assert_node_contains "$double_right_dts" 'split_mouse_runtime_input_processor:' 'temp-layer-deactivation-delay-ms = < 0x320 >;' \
     "左Mouseの解除時間が800msではありません"
 assert_node_contains "$double_right_dts" 'split_mouse_runtime_input_processor:' 'x-invert;' \
@@ -142,8 +146,8 @@ assert_node_contains "$double_right_dts" 'split_scroll_runtime_input_processor:'
     "左Scrollの識別子が一致しません"
 assert_node_contains "$double_right_dts" 'split_scroll_runtime_input_processor:' 'scale-divisor = < 0x40 >;' \
     "左Scrollの倍率が1/64ではありません"
-assert_node_contains "$double_right_dts" 'split_scroll_runtime_input_processor:' 'active-layers = < 0x20 >;' \
-    "左Scrollの対象がLayer 5ではありません"
+assert_node_contains "$double_right_dts" 'split_scroll_runtime_input_processor:' 'active-layers = < 0x40 >;' \
+    "左Scrollの対象がLayer 6ではありません"
 assert_node_contains "$double_right_dts" 'split_scroll_runtime_input_processor:' 'xy-to-scroll-enabled;' \
     "左ScrollのXY変換がありません"
 assert_node_contains "$double_right_dts" 'split_scroll_runtime_input_processor:' 'x-invert;' \

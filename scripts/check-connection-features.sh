@@ -36,6 +36,47 @@ assert_not_contains() {
     fi
 }
 
+# UF2は256バイトごとに管理情報が入るため、stringsでは境界上の文字列が分断されます。
+# 各ブロックのFirmware部分だけをつなぎ直してから、RPC識別子を確認します。
+uf2_contains() {
+    local file="$1"
+    local expected="$2"
+
+    python3 - "$file" "$expected" <<'PY'
+import struct
+import sys
+from pathlib import Path
+
+uf2 = Path(sys.argv[1]).read_bytes()
+expected = sys.argv[2].encode("ascii")
+
+# UF2は512バイト単位です。形式が壊れている場合も検査失敗として扱います。
+if len(uf2) % 512 != 0:
+    raise SystemExit(1)
+
+firmware = bytearray()
+for offset in range(0, len(uf2), 512):
+    block = uf2[offset : offset + 512]
+    magic_start, magic_second = struct.unpack_from("<II", block, 0)
+    if magic_start != 0x0A324655 or magic_second != 0x9E5D5157:
+        raise SystemExit(1)
+
+    payload_size = struct.unpack_from("<I", block, 16)[0]
+    if payload_size > 476:
+        raise SystemExit(1)
+    firmware.extend(block[32 : 32 + payload_size])
+
+raise SystemExit(0 if expected in firmware else 1)
+PY
+}
+
+assert_uf2_contains() {
+    local file="$1"
+    local expected="$2"
+    local description="$3"
+    uf2_contains "$file" "$expected" || fail "$description"
+}
+
 check_central() {
     local artifact_dir="$1"
     local kconfig="${artifact_dir}/kconfig"
@@ -53,11 +94,12 @@ check_central() {
     assert_contains "$kconfig" 'CONFIG_ZMK_DEFAULT_LAYER_STUDIO_RPC=y' \
         "${artifact_name}: Default Layer RPCが有効ではありません"
 
-    # 既存7層とStudio用予約4層を合わせた、0～10の全11層を対象にします。
+    # 接続先の既定値には、BaseとmacOSの2層だけを選べるようにします。
+    # Mouseなどの機能レイヤーは一時的に重ねて使うため、選択対象へ含めません。
     assert_contains "$kconfig" 'CONFIG_ZMK_DEFAULT_LAYER_MIN_INDEX=0' \
         "${artifact_name}: Default Layerの最小値が0ではありません"
-    assert_contains "$kconfig" 'CONFIG_ZMK_DEFAULT_LAYER_MAX_INDEX=10' \
-        "${artifact_name}: Default Layerの最大値が10ではありません"
+    assert_contains "$kconfig" 'CONFIG_ZMK_DEFAULT_LAYER_MAX_INDEX=1' \
+        "${artifact_name}: Default Layerの最大値が1ではありません"
 
     # 二重の自動切替を避け、Default Layer側だけがレイヤーを適用します。
     assert_contains "$kconfig" '# CONFIG_ZMK_OS_DETECTION_LAYER_AUTO_SWITCH is not set' \
@@ -67,10 +109,10 @@ check_central() {
     assert_contains "$kconfig" 'CONFIG_BT_MAX_PAIRED=6' \
         "${artifact_name}: BLEプロファイル数に関わる設定が変わっています"
 
-    # UF2内に実際のRPC識別子が入っていることも確認します。
+    # UF2内に実際のRPC識別子がリンクされていることも確認します。
     for subsystem in cormoran_ble cormoran__os_detection cormoran__default_layer; do
-        strings "$uf2" | rg --quiet --fixed-strings -- "$subsystem" || \
-            fail "${artifact_name}: RPC識別子 ${subsystem} がUF2にありません"
+        assert_uf2_contains "$uf2" "$subsystem" \
+            "${artifact_name}: RPC識別子 ${subsystem} がUF2にありません"
     done
 }
 
@@ -92,7 +134,7 @@ check_peripheral() {
         "${artifact_name}: PeripheralへDefault Layerが入っています"
 
     for subsystem in cormoran_ble cormoran__os_detection cormoran__default_layer; do
-        if strings "$uf2" | rg --quiet --fixed-strings -- "$subsystem"; then
+        if uf2_contains "$uf2" "$subsystem"; then
             fail "${artifact_name}: PeripheralのUF2にRPC識別子 ${subsystem} が入っています"
         fi
     done

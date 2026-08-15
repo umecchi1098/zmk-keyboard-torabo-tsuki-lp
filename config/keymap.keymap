@@ -10,12 +10,13 @@
 #include <behaviors/runtime_macro.dtsi>
 
 #define BASE     0
-#define MOUSE    1
-#define LOWER    2
-#define MID      3
-#define RAISE    4
-#define SCROLL   5
-#define ADJUST   6
+#define MACOS    1
+#define MOUSE    2
+#define LOWER    3
+#define MID      4
+#define RAISE    5
+#define SCROLL   6
+#define ADJUST   7
 
 // OS設定を日本語キーボードのまま使用するための変換定義
 #define JP_DQUOTE       AT                // "
@@ -79,8 +80,21 @@
             >;
         };
 
-// MOUSE
+// macOS
+// Baseレイヤーを下敷きにし、修飾キーだけをmacOS向けの並びへ変更します。
+// 透明キーはBaseの割り当てをそのまま使うため、通常キーを二重管理する必要がありません。
         layer_1 {
+            display-name = "macOS";
+            bindings = <
+&trans  &trans    &trans    &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans    &trans    &trans  &trans  &trans                  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans    &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &kp LALT  &kp LGUI  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+// MOUSE
+        layer_2 {
             display-name = "Mouse";
             bindings = <
 &trans  &trans  &trans  &trans     &trans     &trans                  &trans  &trans     &trans     &trans     &trans      &trans
@@ -91,7 +105,7 @@
         };
 
 // LOWER
-        layer_2 {
+        layer_3 {
             display-name = "Lower";
             bindings = <
 &trans  &kp LS(N1)        &kp LS(N2)        &kp LS(N3)  &kp LS(N4)  &kp LS(N5)                              &kp LS(N6)      &kp LS(N7)     &kp LS(N8)        &kp LS(N9)         &kp LS(N0)     &trans
@@ -102,7 +116,7 @@
         };
 
 // MID
-        layer_3 {
+        layer_4 {
             display-name = "Mid";
             bindings = <
 &trans  &kp N1  &kp N2  &kp N3     &kp N4     &kp N5                   &trans       &trans     &kp UP      &trans     &trans      &trans
@@ -113,7 +127,7 @@
         };
 
 // RAISE
-        layer_4 {
+        layer_5 {
             display-name = "Raise";
             bindings = <
 &trans  &kp F1   &kp F2   &kp F3        &kp F4        &kp F5                                &kp KP_N7      &kp KP_N8        &kp KP_N9      &kp KP_MULTIPLY   &kp KP_DIVIDE   &trans
@@ -125,7 +139,7 @@
 
 // SCROLL
 // スクロールレイヤー。トラックボールのスクロールモード切替に使用する
-        layer_5 {
+        layer_6 {
             display-name = "Scroll";
             bindings = <
 &trans  &trans  &trans  &trans     &trans     &trans                  &trans  &trans     &trans     &trans     &trans  &trans
@@ -137,7 +151,7 @@
 
 // ADJUST
 // 設定レイヤー。Bluetoothのペアリングや、トラックボールのモード切替などを行う
-        layer_6 {
+        layer_7 {
             display-name = "Adjust";
             bindings = <
 &studio_unlock  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4          &bt BT_CLR_ALL  &trans     &trans     &trans     &trans  &trans
@@ -148,10 +162,9 @@
         };
 
 // DYA Studioから追加レイヤーを作成できるよう、末尾に空き領域を確保します。
-// 既存レイヤー0～6の番号や内容には影響しません。
+// 接続先の既定レイヤーにはBaseまたはmacOSだけを使用し、この領域は通常の編集用に残します。
         extra_1 { status = "reserved"; };
         extra_2 { status = "reserved"; };
         extra_3 { status = "reserved"; };
-        extra_4 { status = "reserved"; };
     };
 };
