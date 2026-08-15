@@ -65,6 +65,8 @@ OS検出はUSB列挙やBLE GATTアクセスの特徴を利用するヒューリ�
 
 `./scripts/zmk-build.sh dya`で6成果物をクリーンビルドし、すべて成功した。
 
+GitHub Actions run [`31862088003`](https://github.com/umecchi1098/zmk-keyboard-torabo-tsuki-lp/actions/runs/31862088003)でも6成果物のビルドとアーカイブが成功した。CI成果物を取得してローカル成果物と比較し、全ファイルがバイト単位で一致した。
+
 | 成果物 | text | data | BSS | Flash | RAM | UF2 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | 標準 左Peripheral | 196,260 B | 23,474 B | 70,887 B | 30.14% | 28.58% | 439,808 B |
@@ -73,6 +75,15 @@ OS検出はUSB列挙やBLE GATTアクセスの特徴を利用するヒューリ�
 | `double_ball` 左Peripheral | 202,868 B | 24,030 B | 71,051 B | 31.12% | 28.71% | 454,144 B |
 | `double_ball` 右Central | 300,884 B | 68,653 B | 137,736 B | 50.69% | 56.01% | 739,328 B |
 | Settings Reset | 50,808 B | 3,837 B | 12,179 B | 7.50% | 5.02% | 109,568 B |
+
+| 成果物 | SHA-256 |
+| --- | --- |
+| 標準 左Peripheral | `5179dfb912266f9fee65124ef61e807d9eeb355662b2d6415bdf807887b0098e` |
+| 標準 右Central本番版 | `e3653988da3ff93057d86fe6831f41ce53124328a440aeb9727a3139bb8cd4d9` |
+| 標準 右Central開発版 | `ba7824d09f94d7244ebac68e1d7401b360f4eac5b5418a15bcd38edd2f9031d9` |
+| `double_ball` 左Peripheral | `178082481dc2abd25862e22b76f306b1997eba9b2a90364fbce90ef744077d73` |
+| `double_ball` 右Central | `6d8d99b861b79977ced7d5e418e5d1f564a210e503745858abe6d0442ca67dde` |
+| Settings Reset | `1481398b551dd7b1032c9d86b2966ba579b77cac3b1302fad95203727221cfeb` |
 
 フェーズ6比で標準右Centralはtextが5,116 B、dataが5,560 B、BSSが3,022 B増加した。Flashは1.46ポイント、RAMは1.29ポイント増加したが、いずれも十分な空きがある。
 
