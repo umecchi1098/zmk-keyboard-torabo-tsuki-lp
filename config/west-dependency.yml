@@ -82,6 +82,10 @@ manifest:
     - name: zmk-feature-runtime-combo
       remote: cormoran
       revision: d9490e7b5d41c516221d131241009e81740efcee
+    # トラックボールの感度、回転、反転、自動Mouse、Scrollを実行時に変更します。
+    - name: zmk-module-runtime-input-processor
+      remote: cormoran
+      revision: 43618985f8c9d5457cc333b7ca0733f2d361911e
     # 押下位置とレイヤー変更をDYA Studioへ通知する可視化機能です。
     - name: zmk-feature-input-stream
       remote: cormoran

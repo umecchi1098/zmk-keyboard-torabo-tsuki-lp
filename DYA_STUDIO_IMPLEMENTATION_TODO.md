@@ -351,32 +351,33 @@ SHA-256、初回書き込みと実機確認手順は
 
 ## フェーズ6: Runtime Input Processorへの移行
 
-状態: 未着手
+状態: 実装済み・実機確認待ち
 
 ### Codex
 
-- [ ] 公式派生ブランチのRuntime Input Processor移行差分を再確認する
-- [ ] `zmk-module-runtime-input-processor` を追加する
-- [ ] 現在の静的処理を表す回帰テストまたはDevicetree検査を追加する
-- [ ] Mouse Runtime Input Processorを追加する
-- [ ] Scroll Runtime Input Processorを追加する
-- [ ] 右Auto Mouseの既定値を500msにする
-- [ ] 左Auto Mouseの既定値を800msにする
-- [ ] Scrollの既定active layerを5にする
-- [ ] X軸反転を維持する
-- [ ] スクロール倍率 `1/64` 相当を維持する
-- [ ] `process-next` 相当のイベント処理順を維持する
-- [ ] Local／Split Input Listenerの両方に適用する
-- [ ] 旧 `auto_mouse_layer` を安全に削除する
+- [x] 公式派生ブランチのRuntime Input Processor移行差分を再確認する
+- [x] `zmk-module-runtime-input-processor` を追加する
+- [x] 現在の静的処理を表す回帰テストまたはDevicetree検査を追加する
+- [x] Mouse Runtime Input Processorを追加する
+- [x] Scroll Runtime Input Processorを追加する
+- [x] 右Auto Mouseの既定値を500msにする
+- [x] 左Auto Mouseの既定値を800msにする
+- [x] Scrollの既定active layerを5にする
+- [x] X軸反転を維持する
+- [x] スクロール倍率 `1/64` 相当を維持する
+- [x] `process-next` 相当のイベント処理順を維持する
+- [x] Local／Split Input Listenerの両方に適用する
+- [x] 旧 `auto_mouse_layer` を安全に削除する
 
 ### 自動検証
 
-- [ ] 左右overlayのRuntime Processor参照が解決する
-- [ ] Local／Split構成がすべてビルド成功する
-- [ ] Processorの既定値が現在値と一致する
-- [ ] 設定範囲と保存先がFirmware側で検証される
-- [ ] RAM／Flash／スタック使用量が許容範囲内である
-- [ ] 上流Runtime Input Processorテストが実行可能な範囲で成功する
+- [x] 左右overlayとSplit ListenerのRuntime Processor参照が解決する
+- [x] Local／Split構成がすべてビルド成功する
+- [x] Processorの既定値が現在値と一致する
+- [x] 保存先、blobバージョン、blobサイズがFirmware側で検証される
+- [x] 公式UIの数値範囲と、Firmware単体では完全拒否しない上流制約を記録する
+- [x] RAM／Flash／スタック使用量が許容範囲内である
+- [x] 上流Runtime Input Processorテストが実行可能な範囲で成功する
 
 ### ユーザー実機確認 — 必須ゲート
 
@@ -390,7 +391,7 @@ SHA-256、初回書き込みと実機確認手順は
 
 ### コミット
 
-- [ ] `ポインター設定をRuntime Input Processorへ移行`
+- [x] `ポインター設定をRuntime Input Processorへ移行`
 - [ ] 実機確認後に必要なら `ポインター実機確認結果を反映`
 
 ---

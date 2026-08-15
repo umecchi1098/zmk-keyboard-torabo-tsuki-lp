@@ -10,7 +10,11 @@
 
 通常運用には `torabo_tsuki_lp_right_central.uf2` を使用してください。本番版は誤操作防止のStudio Lockが有効です。`Mid + Raise` でAdjustレイヤーへ入り、左上のキーを押すと編集を解除できます。
 
-`torabo_tsuki_lp_right_central_develop.uf2` はStudio Lockを無効にした開発・切り分け専用版です。通常運用には使用しないでください。対応済み機能と実機確認手順は[フェーズ3の検証記録](docs/dya-studio/phase3.md)を参照してください。
+Runtime Input Processor画面では、トラックボールの感度、回転、軸反転、自動Mouse、Scroll設定を変更・保存できます。通常版には`mouse`と`scroll`が表示されます。詳しい既定値と確認手順は[フェーズ6の検証記録](docs/dya-studio/phase6.md)を参照してください。
+
+`torabo_tsuki_lp_right_central_develop.uf2` はStudio Lockを無効にした開発・切り分け専用版です。通常運用には使用しないでください。
+
+左右両方にポインターを搭載する場合だけ、`torabo_tsuki_lp_double_ball_left_peripheral.uf2`と`torabo_tsuki_lp_double_ball_right_central.uf2`を組にして使用してください。標準版との混在は避けてください。
 
 ## 省電力設定について
 

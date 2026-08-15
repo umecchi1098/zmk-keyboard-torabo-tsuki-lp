@@ -25,6 +25,25 @@ include:
       - input-trackball
       - input-listener
     cmake-args: -DCONFIG_ZMK_STUDIO_LOCKING=n
+  # 左右両方にポインターを搭載する場合だけ使用する、double-ball構成です。
+  - artifact: torabo_tsuki_lp_double_ball_left_peripheral
+    board: bmp_boost/nrf52840
+    shield: torabo_tsuki_lp_left
+    snippets:
+      - studio-rpc-usb-uart
+      # 左側の入力は加工せず、Split経由で右Centralへ送ります。
+      - input-trackball
+      - input-split
+  - artifact: torabo_tsuki_lp_double_ball_right_central
+    board: bmp_boost/nrf52840
+    shield: torabo_tsuki_lp_right
+    snippets:
+      - studio-rpc-usb-uart
+      - split-central
+      - input-trackball
+      - input-listener
+      # 左Peripheralから届いた入力を、左用Runtime Processorへ渡します。
+      - input-split-listener
   - artifact: settings_reset-bmp_boost-zmk
     board: bmp_boost/nrf52840
     shield: settings_reset

@@ -20,3 +20,12 @@ config TORABO_TSUKI_LP_SECURE_RUNTIME_COMBO_RPC
       Runtime Comboの固定済み上流版では、画面のRPC全体がLock中も呼び出せます。
       Torabo Tsuki LPでは安全性を優先し、一覧表示を含む画面全体を
       Studio Unlock後だけ利用できるようにします。
+
+config TORABO_TSUKI_LP_SECURE_RUNTIME_INPUT_PROCESSOR_RPC
+    bool "Runtime Input Processor画面と保存データをStudio Unlockで保護"
+    default y
+    depends on ZMK_RUNTIME_INPUT_PROCESSOR_STUDIO_RPC && ZMK_CUSTOM_SETTINGS_STUDIO_RPC
+    help
+      Runtime Input Processorの固定済み上流版では、専用画面と保存用の
+      Custom SettingsがLock中も呼び出せます。Torabo Tsuki LPでは、
+      一覧表示と設定変更の両方をStudio Unlock後だけ利用可能にします。

@@ -1,17 +1,29 @@
 #include "torabo_tsuki_lp.dtsi"
-#include <input/processors.dtsi>
-#include <dt-bindings/zmk/input_transform.h>
 
 &pointing_listener {
-    input-processors = <&auto_mouse_layer 1 500
-                        &zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>;
-    scroller {
-        layers = <5>;
-        input-processors = <&zip_xy_transform INPUT_TRANSFORM_X_INVERT
-                            &zip_xy_scaler 1 64
-                            &zip_xy_to_scroll_mapper>;
-        process-next;
-    };
+    /* Scrollを先に処理すると、Layer 5ではMouse側が変換済みイベントを無視します。 */
+    input-processors = <&scroll_runtime_input_processor
+                        &mouse_runtime_input_processor>;
+};
+
+&mouse_runtime_input_processor {
+    /* 右側は従来どおり、150msの待機後に500msのMouseレイヤーを使用します。 */
+    temp-layer-enabled;
+    temp-layer = <1>;
+    temp-layer-activation-delay-ms = <150>;
+    temp-layer-deactivation-delay-ms = <500>;
+    x-invert;
+    y-invert;
+};
+
+&scroll_runtime_input_processor {
+    x-codes = <INPUT_REL_X>;
+    y-codes = <INPUT_REL_Y>;
+    scale-multiplier = <1>;
+    scale-divisor = <64>;
+    active-layers = <BIT(5)>;
+    xy-to-scroll-enabled;
+    x-invert;
 };
 
 &size_s_transform {

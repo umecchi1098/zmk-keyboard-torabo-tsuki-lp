@@ -245,8 +245,8 @@
         size = <190>;
         x = <875>;
         y = <475>;
-        linked-device-identifiers = "pointing_device";
-        linked-subsystems = "zmk__pointing";
+        linked-device-identifiers = "mouse", "scroll";
+        linked-subsystems = "cormoran_rip", "cormoran_rip";
     };
 
     // オプションの円形トラックパッドは、電池カバー上の代表位置を表示します。
@@ -259,7 +259,7 @@
         height = <300>;
         x = <1175>;
         y = <475>;
-        linked-device-identifiers = "pointing_device";
-        linked-subsystems = "zmk__pointing";
+        linked-device-identifiers = "mouse", "scroll";
+        linked-subsystems = "cormoran_rip", "cormoran_rip";
     };
 };

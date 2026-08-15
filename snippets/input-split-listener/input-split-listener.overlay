@@ -13,6 +13,8 @@
         compatible = "zmk,input-listener";
         device = <&pointing_device_split>;
         status = "okay";
-        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>;
+        /* Local側と同じくScrollを先に処理し、Layer 5以外はMouse処理へ渡します。 */
+        input-processors = <&split_scroll_runtime_input_processor
+                            &split_mouse_runtime_input_processor>;
      };
 };
