@@ -1,0 +1,5 @@
+# 右Centralで、左ミニトラックパッドの入力とStudio表示を有効にします。
+name: input-split-trackpad-mini
+append:
+  EXTRA_DTC_OVERLAY_FILE: input-split-trackpad-mini.overlay
+  EXTRA_CONF_FILE: input-split-trackpad-mini.conf

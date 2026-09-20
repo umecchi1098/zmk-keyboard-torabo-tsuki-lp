@@ -18,7 +18,9 @@ Runtime Input Processor画面では、トラックボールの感度、回転、
 
 `torabo_tsuki_lp_right_central_develop.uf2` はStudio Lockを無効にした開発・切り分け専用版です。通常運用には使用しないでください。
 
-左右両方にポインターを搭載する場合だけ、`torabo_tsuki_lp_double_ball_left_peripheral.uf2`と`torabo_tsuki_lp_double_ball_right_central.uf2`を組にして使用してください。標準版との混在は避けてください。
+左右両方にトラックボールを搭載する場合だけ、`torabo_tsuki_lp_double_ball_left_peripheral.uf2`と`torabo_tsuki_lp_double_ball_right_central.uf2`を組にして使用してください。標準版との混在は避けてください。
+
+左ミニトラックパッドと右トラックボールを使う場合は、`torabo_tsuki_lp_mini_trackpad_left_peripheral.uf2`と`torabo_tsuki_lp_mini_trackpad_right_central.uf2`を組にして使用してください。Studioでは`lpad`で左のスクロール感度・方向を調整できます。初期感度は`1/60`、通常スクロールで動作します。書き込み・確認手順と高分解能化の制約は[ミニトラックパッド運用メモ](docs/dya-studio/mini-trackpad.md)を参照してください。
 
 ## 省電力設定について
 

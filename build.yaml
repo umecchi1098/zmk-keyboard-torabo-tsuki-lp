@@ -44,6 +44,24 @@ include:
       - input-listener
       # 左Peripheralから届いた入力を、左用Runtime Processorへ渡します。
       - input-split-listener
+  # 左ミニトラックパッドと右トラックボールを使う場合は、この左右を組にします。
+  - artifact: torabo_tsuki_lp_mini_trackpad_left_peripheral
+    board: bmp_boost/nrf52840
+    shield: torabo_tsuki_lp_left
+    snippets:
+      - studio-rpc-usb-uart
+      - input-trackpad-mini
+      - input-split
+  - artifact: torabo_tsuki_lp_mini_trackpad_right_central
+    board: bmp_boost/nrf52840
+    shield: torabo_tsuki_lp_right
+    snippets:
+      - studio-rpc-usb-uart
+      - split-central
+      - input-trackball
+      - input-listener
+      # 左から届くWheel入力を、専用のStudio設定で調整します。
+      - input-split-trackpad-mini
   - artifact: settings_reset-bmp_boost-zmk
     board: bmp_boost/nrf52840
     shield: settings_reset
